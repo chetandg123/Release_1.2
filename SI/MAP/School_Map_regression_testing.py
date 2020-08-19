@@ -64,18 +64,17 @@ class cQube_SI_Map_Report(unittest.TestCase):
         self.data.open_cqube_appln(self.driver)
         self.data.login_cqube(self.driver)
         self.data.navigate_to_school_infrastructure_map()
-        time.sleep(5)
 
-    def test_check_district_names(self):
-        self.tests.pop()
-        time.sleep(4)
-        self.logger.info("test_check_district_names" + " " + "Total :" + " " + str(
-            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-        b = District_names(self.driver)
-        result = b.test_districtlist()
-        self.assertNotEqual(0, result, msg="All Districts are not present in select box!..")
-        print("District names order checked")
-        self.logger.info("test_check_district_names is completed...")
+    # def test_check_district_names(self):
+    #     self.tests.pop()
+    #     time.sleep(4)
+    #     self.logger.info("test_check_district_names" + " " + "Total :" + " " + str(
+    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+    #     b = District_names(self.driver)
+    #     result = b.test_districtlist()
+    #     self.assertNotEqual(0, result, msg="All Districts are not present in select box!..")
+    #     print("District names order checked")
+    #     self.logger.info("test_check_district_names is completed...")
 
     def test_check_markes_on_map(self):
         self.tests.pop()
@@ -181,7 +180,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_blockelevel_home_click(self):
         self.tests.pop()
-        time.sleep(2)
+        time.sleep(4)
         self.logger.info("test_blockelevel_home_click" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = block_level_home(self.driver)
@@ -206,6 +205,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_no_of_schools(self):
         self.tests.pop()
+        time.sleep(5)
         self.logger.info("test_no_of_schools" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = Block_school_count(self.driver)
@@ -219,7 +219,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_click_on_block(self):
         self.tests.pop()
-        time.sleep(1)
+        time.sleep(6)
         self.logger.info("test_click_on_block" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = click_on_blocks(self.driver)
@@ -241,6 +241,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_clusterlevel_map(self):
         self.tests.pop()
+        time.sleep(4)
         self.logger.info("test_clusterlevel_map" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = cluster_level_map_check(self.driver)
@@ -487,6 +488,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_districtwise_school(self):
         self.tests.pop()
+        time.sleep(150)
         self.logger.info("test_districtwise_school" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = districtlevel_school(self.driver)
@@ -498,6 +500,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_sc_map_districtwise(self):
         self.tests.pop()
+        time.sleep(60)
         self.logger.info("test_sc_map_districtwise" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = sc_map_districtwise(self.driver)

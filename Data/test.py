@@ -34,22 +34,8 @@ import unittest
 
 from selenium import webdriver
 
+from get_dir import pwd
 
-class facebook(unittest.TestCase):
-    @classmethod
-    def setUp(self):
-        self.driver = webdriver.Chrome(executable_path="path of chrome.exe driver")
-        self.driver.maximize_window()
-        self.driver.get('https://facebook.com/')
-        time.sleep(5)
-
-    def test_login_to_fb(self):
-        self.driver.find_element_by_id('email').send_keys('email address')
-        self.driver.find_element_by_id('pass').send_keys('password')
-        self.driver.find_element_by_name('login').click()
-        print(self.driver.current_url)
-        print(self.driver.title)
-
-    @classmethod
-    def tearDown(self):
-        self.driver.close()
+p = pwd()
+filename = p.get_download_dir()
+print(filename)

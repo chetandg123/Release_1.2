@@ -25,8 +25,8 @@ class districtlevel_school():
             count = len(markers)
             self.cal.page_loading(self.driver)
             self.driver.find_element_by_id(Data.Download).click()
-            time.sleep(3)
-            self.filename = p.get_download_dir() + "/Block_Per_dist_report.csv"
+            time.sleep(5)
+            self.filename = p.get_download_dir() + "/Block_per_dist_report.csv"
             with open(self.filename) as fin:
                 csv_reader = csv.reader(fin, delimiter=',')
                 header = next(csv_reader)

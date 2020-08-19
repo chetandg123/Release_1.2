@@ -1,0 +1,1600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Functional Test Report</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+<style type="text/css" media="screen">
+body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+table       { font-size: 100%; }
+pre         { }
+
+/* -- heading ---------------------------------------------------------------------- */
+h1 {
+	font-size: 16pt;
+	color: gray;
+}
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .attribute {
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- css div popup ------------------------------------------------------------------------ */
+a.popup_link {
+}
+
+a.popup_link:hover {
+    color: red;
+}
+
+.popup_window {
+    display: none;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    /*border: solid #627173 1px; */
+    padding: 10px;
+    background-color: #E6E6D6;
+    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 8pt;
+    width: 500px;
+}
+
+}
+/* -- report ------------------------------------------------------------------------ */
+#show_detail_line {
+    margin-top: 3ex;
+    margin-bottom: 1ex;
+}
+#result_table {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #777;
+}
+#header_row {
+    font-weight: bold;
+    color: white;
+    background-color: #777;
+}
+#result_table td {
+    border: 1px solid #777;
+    padding: 2px;
+}
+#total_row  { font-weight: bold; }
+.passClass  { background-color: #6c6; }
+.failClass  { background-color: #c60; }
+.errorClass { background-color: #c00; }
+.passCase   { color: #6c6; }
+.failCase   { color: #c60; font-weight: bold; }
+.errorCase  { color: #c00; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+
+
+/* -- ending ---------------------------------------------------------------------- */
+#ending {
+}
+
+</style>
+
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+--></script>
+
+<div class='heading'>
+<h1>Functional Test Report</h1>
+<p class='attribute'><strong>Start Time:</strong> 2020-08-10 23:01:56</p>
+<p class='attribute'><strong>Duration:</strong> 0:17:49.542461</p>
+<p class='attribute'><strong>Status:</strong> Pass 13 Error 1</p>
+
+<p class='description'></p>
+</div>
+
+
+
+<p id='show_detail_line'>Show
+<a href='javascript:showCase(0)'>Summary</a>
+<a href='javascript:showCase(1)'>Failed</a>
+<a href='javascript:showCase(2)'>All</a>
+</p>
+<table id='result_table'>
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row'>
+    <td>Test Group/Test case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='errorClass'>
+    <td>Diksha_Reports.Diksha_graph.diksha_graphs.cQube_diskha_chart</td>
+    <td>14</td>
+    <td>13</td>
+    <td>0</td>
+    <td>1</td>
+    <td><a href="javascript:showClassDetail('c1',14)">Detail</a></td>
+</tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_Diksha_homeicon</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
+        pass</a>
+
+    <div id='div_pt1.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.1: Navigated to landing page
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_Diksha_logout</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='ft1.3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_Diksha_others_download</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.3')" >
+        error</a>
+
+    <div id='div_ft1.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.3: Traceback (most recent call last):
+  File "/home/chetan/Desktop/cQubeTesting/Diksha_Reports/Diksha_graph/diksha_graphs.py", line 95, in test_Diksha_others_download
+    res = b.test_others_file()
+  File "/home/chetan/Desktop/cQubeTesting/Diksha_Reports/Diksha_graph/download_the_others_file.py", line 29, in test_others_file
+    os.remove(self.filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/chetan/Desktop/cQubeTesting/Downloads/Diksha_All_data_Others.csv'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_Diksha_students_download</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_Diksha_teacher_download</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_all_data_file_donwload</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_choosedistricts</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.7')" >
+        pass</a>
+
+    <div id='div_pt1.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.7:  Ahmedabad 
+ Amreli 
+ Anand 
+ Aravalli 
+ Banaskantha 
+ Bharuch 
+ Bhavnagar 
+ Botad 
+ Chhotaudepur 
+ Devbhoomidwarka 
+ Dohad 
+ Gandhinagar 
+ Girsomnath 
+ Jamnagar 
+ Junagadh 
+ Kachchh 
+ Kheda 
+ Mahesana 
+ Mahisagar 
+ Morbi 
+ Narmada 
+ Navsari 
+ Patan 
+ Porbandar 
+ Rajkot 
+ Sabarkantha 
+ Surat 
+ Surendranagar 
+ Tapi 
+ Thedangs 
+ Vadodara 
+ Valsad 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_click_on_diksha_charticon</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.8')" >
+        pass</a>
+
+    <div id='div_pt1.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.8: Diksha chart report page is present 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_hyperlink</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_lastday_records</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.10')" >
+        pass</a>
+
+    <div id='div_pt1.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.10:  Amreli   is not contains over all data chart 
+ Amreli   is not contains  Teacher data chart 
+ Amreli   is not contains students  data chart 
+ Amreli   is not contains other's  data chart 
+ Anand   is not contains over all data chart 
+ Anand   is not contains  Teacher data chart 
+ Anand   is not contains students  data chart 
+ Anand   is not contains other's  data chart 
+ Aravalli   is not contains over all data chart 
+ Aravalli   is not contains  Teacher data chart 
+ Aravalli   is not contains students  data chart 
+ Aravalli   is not contains other's  data chart 
+ Banaskantha   is not contains over all data chart 
+ Banaskantha   is not contains  Teacher data chart 
+ Banaskantha   is not contains students  data chart 
+ Banaskantha   is not contains other's  data chart 
+ Bhavnagar   is not contains over all data chart 
+ Bhavnagar   is not contains  Teacher data chart 
+ Bhavnagar   is not contains students  data chart 
+ Bhavnagar   is not contains other's  data chart 
+ Botad   is not contains over all data chart 
+ Botad   is not contains  Teacher data chart 
+ Botad   is not contains students  data chart 
+ Botad   is not contains other's  data chart 
+ Chhotaudepur   is not contains over all data chart 
+ Chhotaudepur   is not contains  Teacher data chart 
+ Chhotaudepur   is not contains students  data chart 
+ Chhotaudepur   is not contains other's  data chart 
+ Devbhoomidwarka   is not contains over all data chart 
+ Devbhoomidwarka   is not contains  Teacher data chart 
+ Devbhoomidwarka   is not contains students  data chart 
+ Devbhoomidwarka   is not contains other's  data chart 
+ Dohad   is not contains over all data chart 
+ Dohad   is not contains  Teacher data chart 
+ Dohad   is not contains students  data chart 
+ Dohad   is not contains other's  data chart 
+ Gandhinagar   is not contains over all data chart 
+ Gandhinagar   is not contains  Teacher data chart 
+ Gandhinagar   is not contains students  data chart 
+ Gandhinagar   is not contains other's  data chart 
+ Girsomnath   is not contains over all data chart 
+ Girsomnath   is not contains  Teacher data chart 
+ Girsomnath   is not contains students  data chart 
+ Girsomnath   is not contains other's  data chart 
+ Jamnagar   is not contains over all data chart 
+ Jamnagar   is not contains  Teacher data chart 
+ Jamnagar   is not contains students  data chart 
+ Jamnagar   is not contains other's  data chart 
+ Junagadh   is not contains over all data chart 
+ Junagadh   is not contains  Teacher data chart 
+ Junagadh   is not contains students  data chart 
+ Junagadh   is not contains other's  data chart 
+ Kachchh   is not contains over all data chart 
+ Kachchh   is not contains  Teacher data chart 
+ Kachchh   is not contains students  data chart 
+ Kachchh   is not contains other's  data chart 
+ Kheda   is not contains over all data chart 
+ Kheda   is not contains  Teacher data chart 
+ Kheda   is not contains students  data chart 
+ Kheda   is not contains other's  data chart 
+ Mahesana   is not contains over all data chart 
+ Mahesana   is not contains  Teacher data chart 
+ Mahesana   is not contains students  data chart 
+ Mahesana   is not contains other's  data chart 
+ Mahisagar   is not contains over all data chart 
+ Mahisagar   is not contains  Teacher data chart 
+ Mahisagar   is not contains students  data chart 
+ Mahisagar   is not contains other's  data chart 
+ Morbi   is not contains over all data chart 
+ Morbi   is not contains  Teacher data chart 
+ Morbi   is not contains students  data chart 
+ Morbi   is not contains other's  data chart 
+ Narmada   is not contains over all data chart 
+ Narmada   is not contains  Teacher data chart 
+ Narmada   is not contains students  data chart 
+ Narmada   is not contains other's  data chart 
+ Navsari   is not contains over all data chart 
+ Navsari   is not contains  Teacher data chart 
+ Navsari   is not contains students  data chart 
+ Navsari   is not contains other's  data chart 
+ Patan   is not contains over all data chart 
+ Patan   is not contains  Teacher data chart 
+ Patan   is not contains students  data chart 
+ Patan   is not contains other's  data chart 
+ Porbandar   is not contains over all data chart 
+ Porbandar   is not contains  Teacher data chart 
+ Porbandar   is not contains students  data chart 
+ Porbandar   is not contains other's  data chart 
+ Rajkot   is not contains over all data chart 
+ Rajkot   is not contains  Teacher data chart 
+ Rajkot   is not contains students  data chart 
+ Rajkot   is not contains other's  data chart 
+ Sabarkantha   is not contains over all data chart 
+ Sabarkantha   is not contains  Teacher data chart 
+ Sabarkantha   is not contains students  data chart 
+ Sabarkantha   is not contains other's  data chart 
+ Surat   is not contains over all data chart 
+ Surat   is not contains  Teacher data chart 
+ Surat   is not contains students  data chart 
+ Surat   is not contains other's  data chart 
+ Surendranagar   is not contains over all data chart 
+ Surendranagar   is not contains  Teacher data chart 
+ Surendranagar   is not contains students  data chart 
+ Surendranagar   is not contains other's  data chart 
+ Tapi   is not contains over all data chart 
+ Tapi   is not contains  Teacher data chart 
+ Tapi   is not contains students  data chart 
+ Tapi   is not contains other's  data chart 
+ Thedangs   is not contains over all data chart 
+ Thedangs   is not contains  Teacher data chart 
+ Thedangs   is not contains students  data chart 
+ Thedangs   is not contains other's  data chart 
+ Vadodara   is not contains over all data chart 
+ Vadodara   is not contains  Teacher data chart 
+ Vadodara   is not contains students  data chart 
+ Vadodara   is not contains other's  data chart 
+ Valsad   is not contains over all data chart 
+ Valsad   is not contains  Teacher data chart 
+ Valsad   is not contains students  data chart 
+ Valsad   is not contains other's  data chart 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_lastmonth_wise</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.11')" >
+        pass</a>
+
+    <div id='div_pt1.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.11:  Girsomnath   is not contains over all data chart 
+ Girsomnath   is not contains  Teacher data chart 
+ Girsomnath   is not contains students  data chart 
+ Girsomnath   is not contains other's  data chart 
+ Porbandar   is not contains over all data chart 
+ Porbandar   is not contains  Teacher data chart 
+ Porbandar   is not contains students  data chart 
+ Porbandar   is not contains other's  data chart 
+ Thedangs   is not contains over all data chart 
+ Thedangs   is not contains  Teacher data chart 
+ Thedangs   is not contains students  data chart 
+ Thedangs   is not contains other's  data chart 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_lastweek_wise</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.12')" >
+        pass</a>
+
+    <div id='div_pt1.12' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.12:  Amreli   is not contains over all data chart 
+ Amreli   is not contains  Teacher data chart 
+ Amreli   is not contains students  data chart 
+ Amreli   is not contains other's  data chart 
+ Aravalli   is not contains over all data chart 
+ Aravalli   is not contains  Teacher data chart 
+ Aravalli   is not contains students  data chart 
+ Aravalli   is not contains other's  data chart 
+ Banaskantha   is not contains over all data chart 
+ Banaskantha   is not contains  Teacher data chart 
+ Banaskantha   is not contains students  data chart 
+ Banaskantha   is not contains other's  data chart 
+ Bhavnagar   is not contains over all data chart 
+ Bhavnagar   is not contains  Teacher data chart 
+ Bhavnagar   is not contains students  data chart 
+ Bhavnagar   is not contains other's  data chart 
+ Botad   is not contains over all data chart 
+ Botad   is not contains  Teacher data chart 
+ Botad   is not contains students  data chart 
+ Botad   is not contains other's  data chart 
+ Devbhoomidwarka   is not contains over all data chart 
+ Devbhoomidwarka   is not contains  Teacher data chart 
+ Devbhoomidwarka   is not contains students  data chart 
+ Devbhoomidwarka   is not contains other's  data chart 
+ Gandhinagar   is not contains over all data chart 
+ Gandhinagar   is not contains  Teacher data chart 
+ Gandhinagar   is not contains students  data chart 
+ Gandhinagar   is not contains other's  data chart 
+ Girsomnath   is not contains over all data chart 
+ Girsomnath   is not contains  Teacher data chart 
+ Girsomnath   is not contains students  data chart 
+ Girsomnath   is not contains other's  data chart 
+ Jamnagar   is not contains over all data chart 
+ Jamnagar   is not contains  Teacher data chart 
+ Jamnagar   is not contains students  data chart 
+ Jamnagar   is not contains other's  data chart 
+ Junagadh   is not contains over all data chart 
+ Junagadh   is not contains  Teacher data chart 
+ Junagadh   is not contains students  data chart 
+ Junagadh   is not contains other's  data chart 
+ Kachchh   is not contains over all data chart 
+ Kachchh   is not contains  Teacher data chart 
+ Kachchh   is not contains students  data chart 
+ Kachchh   is not contains other's  data chart 
+ Kheda   is not contains over all data chart 
+ Kheda   is not contains  Teacher data chart 
+ Kheda   is not contains students  data chart 
+ Kheda   is not contains other's  data chart 
+ Mahisagar   is not contains over all data chart 
+ Mahisagar   is not contains  Teacher data chart 
+ Mahisagar   is not contains students  data chart 
+ Mahisagar   is not contains other's  data chart 
+ Morbi   is not contains over all data chart 
+ Morbi   is not contains  Teacher data chart 
+ Morbi   is not contains students  data chart 
+ Morbi   is not contains other's  data chart 
+ Narmada   is not contains over all data chart 
+ Narmada   is not contains  Teacher data chart 
+ Narmada   is not contains students  data chart 
+ Narmada   is not contains other's  data chart 
+ Navsari   is not contains over all data chart 
+ Navsari   is not contains  Teacher data chart 
+ Navsari   is not contains students  data chart 
+ Navsari   is not contains other's  data chart 
+ Patan   is not contains over all data chart 
+ Patan   is not contains  Teacher data chart 
+ Patan   is not contains students  data chart 
+ Patan   is not contains other's  data chart 
+ Porbandar   is not contains over all data chart 
+ Porbandar   is not contains  Teacher data chart 
+ Porbandar   is not contains students  data chart 
+ Porbandar   is not contains other's  data chart 
+ Rajkot   is not contains over all data chart 
+ Rajkot   is not contains  Teacher data chart 
+ Rajkot   is not contains students  data chart 
+ Rajkot   is not contains other's  data chart 
+ Sabarkantha   is not contains over all data chart 
+ Sabarkantha   is not contains  Teacher data chart 
+ Sabarkantha   is not contains students  data chart 
+ Sabarkantha   is not contains other's  data chart 
+ Surat   is not contains over all data chart 
+ Surat   is not contains  Teacher data chart 
+ Surat   is not contains students  data chart 
+ Surat   is not contains other's  data chart 
+ Surendranagar   is not contains over all data chart 
+ Surendranagar   is not contains  Teacher data chart 
+ Surendranagar   is not contains students  data chart 
+ Surendranagar   is not contains other's  data chart 
+ Tapi   is not contains over all data chart 
+ Tapi   is not contains  Teacher data chart 
+ Tapi   is not contains students  data chart 
+ Tapi   is not contains other's  data chart 
+ Thedangs   is not contains over all data chart 
+ Thedangs   is not contains  Teacher data chart 
+ Thedangs   is not contains students  data chart 
+ Thedangs   is not contains other's  data chart 
+ Vadodara   is not contains over all data chart 
+ Vadodara   is not contains  Teacher data chart 
+ Vadodara   is not contains students  data chart 
+ Vadodara   is not contains other's  data chart 
+ Valsad   is not contains over all data chart 
+ Valsad   is not contains  Teacher data chart 
+ Valsad   is not contains students  data chart 
+ Valsad   is not contains other's  data chart 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.13' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_navigate_diksha</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.13')" >
+        pass</a>
+
+    <div id='div_pt1.13' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.13').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.13: Diksha chart page is Displayed
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.14' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_timeperiods</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='total_row'>
+    <td>Total</td>
+    <td>14</td>
+    <td>13</td>
+    <td>0</td>
+    <td>1</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+
+</body>
+</html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>cQube Diksha Report</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+<style type="text/css" media="screen">
+body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+table       { font-size: 100%; }
+pre         { }
+
+/* -- heading ---------------------------------------------------------------------- */
+h1 {
+	font-size: 16pt;
+	color: gray;
+}
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .attribute {
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- css div popup ------------------------------------------------------------------------ */
+a.popup_link {
+}
+
+a.popup_link:hover {
+    color: red;
+}
+
+.popup_window {
+    display: none;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    /*border: solid #627173 1px; */
+    padding: 10px;
+    background-color: #E6E6D6;
+    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 8pt;
+    width: 500px;
+}
+
+}
+/* -- report ------------------------------------------------------------------------ */
+#show_detail_line {
+    margin-top: 3ex;
+    margin-bottom: 1ex;
+}
+#result_table {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid #777;
+}
+#header_row {
+    font-weight: bold;
+    color: white;
+    background-color: #777;
+}
+#result_table td {
+    border: 1px solid #777;
+    padding: 2px;
+}
+#total_row  { font-weight: bold; }
+.passClass  { background-color: #6c6; }
+.failClass  { background-color: #c60; }
+.errorClass { background-color: #c00; }
+.passCase   { color: #6c6; }
+.failCase   { color: #c60; font-weight: bold; }
+.errorCase  { color: #c00; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+
+
+/* -- ending ---------------------------------------------------------------------- */
+#ending {
+}
+
+</style>
+
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+--></script>
+
+<div class='heading'>
+<h1>cQube Diksha Report</h1>
+<p class='attribute'><strong>Start Time:</strong> 2020-08-10 23:19:46</p>
+<p class='attribute'><strong>Duration:</strong> 0:23:20.072740</p>
+<p class='attribute'><strong>Status:</strong> Pass 13 Failure 1 Error 2</p>
+
+<p class='description'></p>
+</div>
+
+
+
+<p id='show_detail_line'>Show
+<a href='javascript:showCase(0)'>Summary</a>
+<a href='javascript:showCase(1)'>Failed</a>
+<a href='javascript:showCase(2)'>All</a>
+</p>
+<table id='result_table'>
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row'>
+    <td>Test Group/Test case</td>
+    <td>Count</td>
+    <td>Pass</td>
+    <td>Fail</td>
+    <td>Error</td>
+    <td>View</td>
+</tr>
+
+<tr class='errorClass'>
+    <td>Diksha_Reports.Diksha_report.diksha_table.cQube_diskha_report</td>
+    <td>16</td>
+    <td>13</td>
+    <td>1</td>
+    <td>2</td>
+    <td><a href="javascript:showClassDetail('c1',16)">Detail</a></td>
+</tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_Diksha_homeicon</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_Diksha_logout</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_choosedistricts</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.3')" >
+        pass</a>
+
+    <div id='div_pt1.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.3:  Ahmedabad 
+ Amreli 
+ Anand 
+ Aravalli 
+ Banaskantha 
+ Bharuch 
+ Bhavnagar 
+ Botad 
+ Chhotaudepur 
+ Devbhoomidwarka 
+ Dohad 
+ Gandhinagar 
+ Girsomnath 
+ Jamnagar 
+ Junagadh 
+ Kachchh 
+ Kheda 
+ Mahesana 
+ Mahisagar 
+ Morbi 
+ Narmada 
+ Navsari 
+ Patan 
+ Porbandar 
+ Rajkot 
+ Sabarkantha 
+ Surat 
+ Surendranagar 
+ Tapi 
+ Thedangs 
+ Vadodara 
+ Valsad 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_click_on_diksha_reporticon</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.4')" >
+        pass</a>
+
+    <div id='div_pt1.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.4: Diksha Table report page is present 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_districtiwise_lastdayrecords</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.5')" >
+        pass</a>
+
+    <div id='div_pt1.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.5: 38
+ Ahmedabad  records count mismatch in downloaded file and table records
+4
+ Amreli  records count mismatch in downloaded file and table records
+2
+ Anand  records count mismatch in downloaded file and table records
+ Aravalli   does not last day records
+ Banaskantha   does not last day records
+ Bharuch   does not last day records
+ Bhavnagar   does not last day records
+ Botad   does not last day records
+ Chhotaudepur   does not last day records
+ Devbhoomidwarka   does not last day records
+ Dohad   does not last day records
+ Gandhinagar   does not last day records
+ Girsomnath   does not last day records
+ Jamnagar   does not last day records
+ Junagadh   does not last day records
+ Kachchh   does not last day records
+ Kheda   does not last day records
+ Mahesana   does not last day records
+ Mahisagar   does not last day records
+ Morbi   does not last day records
+ Narmada   does not last day records
+ Navsari   does not last day records
+ Patan   does not last day records
+ Porbandar   does not last day records
+ Rajkot   does not last day records
+ Sabarkantha   does not last day records
+ Surat   does not last day records
+ Surendranagar   does not last day records
+ Tapi   does not last day records
+ Thedangs   does not last day records
+ Vadodara   does not last day records
+ Valsad   does not last day records
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_districtwise_lastmonthrecords</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.6')" >
+        pass</a>
+
+    <div id='div_pt1.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.6:  Ahmedabad   does not last month records
+ Amreli   does not last month records
+ Anand   does not last month records
+ Aravalli   does not last month records
+ Banaskantha   does not last month records
+ Bharuch   does not last month records
+ Bhavnagar   does not last month records
+ Botad   does not last month records
+ Chhotaudepur   does not last month records
+ Devbhoomidwarka   does not last month records
+ Dohad   does not last month records
+ Gandhinagar   does not last month records
+ Girsomnath   does not last month records
+ Jamnagar   does not last month records
+ Junagadh   does not last month records
+ Kachchh   does not last month records
+ Kheda   does not last month records
+ Mahesana   does not last month records
+ Mahisagar   does not last month records
+ Morbi   does not last month records
+ Narmada   does not last month records
+ Navsari   does not last month records
+ Patan   does not last month records
+ Porbandar   does not last month records
+ Rajkot   does not last month records
+ Sabarkantha   does not last month records
+ Surat   does not last month records
+ Surendranagar   does not last month records
+ Tapi   does not last month records
+ Thedangs   does not last month records
+ Vadodara   does not last month records
+ Valsad   does not last month records
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_districtwise_lastweekrecords</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.7')" >
+        pass</a>
+
+    <div id='div_pt1.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.7:  Ahmedabad   does not last week records
+ Amreli   does not last week records
+ Anand   does not last week records
+ Aravalli   does not last week records
+ Banaskantha   does not last week records
+ Bharuch   does not last week records
+ Bhavnagar   does not last week records
+ Botad   does not last week records
+ Chhotaudepur   does not last week records
+ Devbhoomidwarka   does not last week records
+ Dohad   does not last week records
+ Gandhinagar   does not last week records
+ Girsomnath   does not last week records
+ Jamnagar   does not last week records
+ Junagadh   does not last week records
+ Kachchh   does not last week records
+ Kheda   does not last week records
+ Mahesana   does not last week records
+ Mahisagar   does not last week records
+ Morbi   does not last week records
+ Narmada   does not last week records
+ Navsari   does not last week records
+ Patan   does not last week records
+ Porbandar   does not last week records
+ Rajkot   does not last week records
+ Sabarkantha   does not last week records
+ Surat   does not last week records
+ Surendranagar   does not last week records
+ Tapi   does not last week records
+ Thedangs   does not last week records
+ Vadodara   does not last week records
+ Valsad   does not last week records
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_homebtn</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.8')" >
+        pass</a>
+
+    <div id='div_pt1.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.8: Navigated to landing page
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_hyperlink</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='ft1.10' class='none'>
+    <td class='failCase'><div class='testcase'>test_lastday_records</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.10')" >
+        fail</a>
+
+    <div id='div_ft1.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.10: 38
+4
+2
+ Anand  records count mismatch in downloaded file and table records
+ Aravalli   does not last day records
+ Banaskantha   does not last day records
+ Bharuch   does not last day records
+ Bhavnagar   does not last day records
+ Botad   does not last day records
+ Chhotaudepur   does not last day records
+ Devbhoomidwarka   does not last day records
+ Dohad   does not last day records
+ Gandhinagar   does not last day records
+ Girsomnath   does not last day records
+ Jamnagar   does not last day records
+ Junagadh   does not last day records
+ Kachchh   does not last day records
+ Kheda   does not last day records
+ Mahesana   does not last day records
+ Mahisagar   does not last day records
+ Morbi   does not last day records
+ Narmada   does not last day records
+ Navsari   does not last day records
+ Patan   does not last day records
+ Porbandar   does not last day records
+ Rajkot   does not last day records
+ Sabarkantha   does not last day records
+ Surat   does not last day records
+ Surendranagar   does not last day records
+ Tapi   does not last day records
+ Thedangs   does not last day records
+ Vadodara   does not last day records
+ Valsad   does not last day records
+Traceback (most recent call last):
+  File "/snap/pycharm-community/207/plugins/python-ce/helpers/pycharm/teamcity/diff_tools.py", line 32, in _patched_equals
+    old(self, first, second, msg)
+  File "/usr/lib/python3.5/unittest/case.py", line 820, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "/usr/lib/python3.5/unittest/case.py", line 813, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 0 != 1 : Some mismatch found at file records and table records
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chetan/Desktop/cQubeTesting/Diksha_Reports/Diksha_report/diksha_table.py", line 76, in test_lastday_records
+    self.assertEqual(0,res,msg="Some mismatch found at file records and table records")
+  File "/snap/pycharm-community/207/plugins/python-ce/helpers/pycharm/teamcity/diff_tools.py", line 38, in _patched_equals
+    raise error
+teamcity.diff_tools.EqualsAssertionError: Some mismatch found at file records and table records :: 0 != 1
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_lastmonth_records</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.11')" >
+        pass</a>
+
+    <div id='div_pt1.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.11:  Ahmedabad   does not last day records
+ Amreli   does not last day records
+ Anand   does not last day records
+ Aravalli   does not last day records
+ Banaskantha   does not last day records
+ Bharuch   does not last day records
+ Bhavnagar   does not last day records
+ Botad   does not last day records
+ Chhotaudepur   does not last day records
+ Devbhoomidwarka   does not last day records
+ Dohad   does not last day records
+ Gandhinagar   does not last day records
+ Girsomnath   does not last day records
+ Jamnagar   does not last day records
+ Junagadh   does not last day records
+ Kachchh   does not last day records
+ Kheda   does not last day records
+ Mahesana   does not last day records
+ Mahisagar   does not last day records
+ Morbi   does not last day records
+ Narmada   does not last day records
+ Navsari   does not last day records
+ Patan   does not last day records
+ Porbandar   does not last day records
+ Rajkot   does not last day records
+ Sabarkantha   does not last day records
+ Surat   does not last day records
+ Surendranagar   does not last day records
+ Tapi   does not last day records
+ Thedangs   does not last day records
+ Vadodara   does not last day records
+ Valsad   does not last day records
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_lastweek_records</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.12')" >
+        pass</a>
+
+    <div id='div_pt1.12' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.12:  Ahmedabad   does not last day records
+ Amreli   does not last day records
+ Anand   does not last day records
+ Aravalli   does not last day records
+ Banaskantha   does not last day records
+ Bharuch   does not last day records
+ Bhavnagar   does not last day records
+ Botad   does not last day records
+ Chhotaudepur   does not last day records
+ Devbhoomidwarka   does not last day records
+ Dohad   does not last day records
+ Gandhinagar   does not last day records
+ Girsomnath   does not last day records
+ Jamnagar   does not last day records
+ Junagadh   does not last day records
+ Kachchh   does not last day records
+ Kheda   does not last day records
+ Mahesana   does not last day records
+ Mahisagar   does not last day records
+ Morbi   does not last day records
+ Narmada   does not last day records
+ Navsari   does not last day records
+ Patan   does not last day records
+ Porbandar   does not last day records
+ Rajkot   does not last day records
+ Sabarkantha   does not last day records
+ Surat   does not last day records
+ Surendranagar   does not last day records
+ Tapi   does not last day records
+ Thedangs   does not last day records
+ Vadodara   does not last day records
+ Valsad   does not last day records
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.13' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_navigate_dikshareport</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.13')" >
+        pass</a>
+
+    <div id='div_pt1.13' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.13').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.13: Diksha page is not exist 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.14' class='none'>
+    <td class='errorCase'><div class='testcase'>test_searchbox</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.14')" >
+        error</a>
+
+    <div id='div_ft1.14' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.14').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.14: Traceback (most recent call last):
+  File "/home/chetan/Desktop/cQubeTesting/Diksha_Reports/Diksha_report/diksha_table.py", line 105, in test_searchbox
+    self.driver.find_element_by_tag_name('input').send_keys('Hindi')
+  File "/home/chetan/Desktop/cQubeTesting/venv/lib/python3.5/site-packages/selenium/webdriver/remote/webdriver.py", line 530, in find_element_by_tag_name
+    return self.find_element(by=By.TAG_NAME, value=name)
+  File "/home/chetan/Desktop/cQubeTesting/venv/lib/python3.5/site-packages/selenium/webdriver/remote/webdriver.py", line 978, in find_element
+    'value': value})['value']
+  File "/home/chetan/Desktop/cQubeTesting/venv/lib/python3.5/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "/home/chetan/Desktop/cQubeTesting/venv/lib/python3.5/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"input"}
+  (Session info: chrome=84.0.4147.105)
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft1.15' class='none'>
+    <td class='errorCase'><div class='testcase'>test_tableorder</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.15')" >
+        error</a>
+
+    <div id='div_ft1.15' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.15').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.15: Traceback (most recent call last):
+  File "/home/chetan/Desktop/cQubeTesting/Diksha_Reports/Diksha_report/diksha_table.py", line 121, in test_tableorder
+    res = b.test_tablevalue()
+  File "/home/chetan/Desktop/cQubeTesting/Diksha_Reports/Diksha_report/check_with_order_of_table.py", line 13, in test_tablevalue
+    self.driver.find_element_by_xpath("//*[@id='table_wrapper']/div[2]/div[1]/div/table/thead/tr/th[1]").click()
+  File "/home/chetan/Desktop/cQubeTesting/venv/lib/python3.5/site-packages/selenium/webdriver/remote/webdriver.py", line 394, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "/home/chetan/Desktop/cQubeTesting/venv/lib/python3.5/site-packages/selenium/webdriver/remote/webdriver.py", line 978, in find_element
+    'value': value})['value']
+  File "/home/chetan/Desktop/cQubeTesting/venv/lib/python3.5/site-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "/home/chetan/Desktop/cQubeTesting/venv/lib/python3.5/site-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id='table_wrapper']/div[2]/div[1]/div/table/thead/tr/th[1]"}
+  (Session info: chrome=84.0.4147.105)
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt1.16' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_timeperiods</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.16')" >
+        pass</a>
+
+    <div id='div_pt1.16' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.16').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt1.16: Choose Time Range 
+ last_day 
+ last_7_days 
+ last_30_days 
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='total_row'>
+    <td>Total</td>
+    <td>16</td>
+    <td>13</td>
+    <td>1</td>
+    <td>2</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+
+</body>
+</html>

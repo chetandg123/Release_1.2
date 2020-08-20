@@ -1,0 +1,11 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120014","Danilimda-1",24071201406,"Sabarmati - 7","30.1 %","null %","null %","null %","29.5 %","28.7 %","32.0 %",349
+2407,"Ahmedabad",240712,"Amc","2407120014","Danilimda-1",24071201401,"Sabarmati - 2","42.0 %","73.3 %","63.7 %","47.2 %","35.0 %","37.4 %","38.1 %",121
+2407,"Ahmedabad",240712,"Amc","2407120014","Danilimda-1",24071201402,"Sabarmati - 3","44.1 %","null %","null %","null %","39.7 %","51.4 %","41.5 %",162
+2407,"Ahmedabad",240712,"Amc","2407120014","Danilimda-1",24071201404,"Sabarmati - 5","45.1 %","null %","null %","null %","39.1 %","43.7 %","52.4 %",136
+2407,"Ahmedabad",240712,"Amc","2407120014","Danilimda-1",24071201408,"Sabarmati - 10","49.1 %","53.8 %","56.1 %","59.4 %","40.6 %","56.8 %","46.4 %",58
+2407,"Ahmedabad",240712,"Amc","2407120014","Danilimda-1",24071201413,"Sabarmati  Tamil - 2","54.4 %","73.1 %","79.7 %","70.9 %","45.3 %","53.8 %","47.3 %",74
+2407,"Ahmedabad",240712,"Amc","2407120014","Danilimda-1",24071201607,"Keshavnagar - 1","57.1 %","71.8 %","75.3 %","59.4 %","49.6 %","58.4 %","56.2 %",277
+2407,"Ahmedabad",240712,"Amc","2407120014","Danilimda-1",24071201403,"Sabarmati - 4","59.1 %","74.2 %","null %","49.9 %","null %","null %","null %",132
+2407,"Ahmedabad",240712,"Amc","2407120014","Danilimda-1",24071201407,"Sabarmati - 8","59.4 %","64.4 %","59.1 %","56.8 %","null %","null %","null %",225
+2407,"Ahmedabad",240712,"Amc","2407120014","Danilimda-1",24071201405,"Sabarmati - 6","69.6 %","null %","71.4 %","68.3 %","null %","null %","null %",150

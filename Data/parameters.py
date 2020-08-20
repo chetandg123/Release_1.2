@@ -32,6 +32,14 @@ class Data():
                  'Chhotaudepur','Devbhoomidwarka','Dohad','Gandhinagar','Girsomnath','Jamnagar',
                  'Junagadh','Kachchh','Kheda','Mahesana','Mahisagar','Morbi','Narmada','Navsari','Patan',
                  'Porbandar','Rajkot','Sabarkantha','Surat','Surendranagar','Tapi','Thedangs','Vadodara','Valsad',]
+
+    crc_click = "/html/body/app-root/app-home/mat-sidenav-container/mat-sidenav/div/mat-nav-list/div/mat-nav-list[2]/mat-list-item/div/mat-icon"
+    sar_click = "/html/body/app-root/app-home/mat-sidenav-container/mat-sidenav/div/mat-nav-list/div/mat-nav-list[3]/mat-list-item/div/mat-icon"
+    school_click ='/html/body/app-root/app-home/mat-sidenav-container/mat-sidenav/div/mat-nav-list/div/mat-nav-list[4]/mat-list-item/div/mat-icon'
+    sr_click = "/html/body/app-root/app-home/mat-sidenav-container/mat-sidenav/div/mat-nav-list/div/mat-nav-list[5]/mat-list-item/div/mat-icon"
+    sem_e_click ="/html/body/app-root/app-home/mat-sidenav-container/mat-sidenav/div/mat-nav-list/div/mat-nav-list[1]/mat-list-item/div/mat-icon"
+    diksha_click = "/html/body/app-root/app-home/mat-sidenav-container/mat-sidenav/div/mat-nav-list/div/mat-nav-list[6]/mat-list-item/div/mat-icon"
+    telemtry_click = "/html/body/app-root/app-home/mat-sidenav-container/mat-sidenav/div/mat-nav-list/div/mat-nav-list[7]/mat-list-item/div/mat-icon"
     # Dash board
     Dashboard = "menu"
     header = "//h4"
@@ -104,9 +112,9 @@ class Data():
     y = "y_axis"
     s_dist = "//select[@name='myDistrict']/option[2]"
     # sc_Reportmap
-    School_infra = "/html/body/app-root/app-home/mat-sidenav-container/mat-sidenav/div/mat-nav-list/div/mat-nav-list/mat-list-item/div/mat-icon"
     Reportmap = "mapReport"
     Report = "tblReport"
+    semester_report ="semReport"
     scm_block = "block"
     scm_cluster = "cluster"
     scm_school = "school"
@@ -119,8 +127,9 @@ class Data():
     diksha ="/html/body/app-root/app-home/mat-sidenav-container/mat-sidenav/div/mat-nav-list/div/mat-nav-list[2]/mat-list-item/div/mat-icon"
     diksha_graph ="chrtReport"
     diksha_table = "dtblReport"
+    diksha_column = "clmnReport"
     sem_exception = "ser"
-
+    telemetry = ""
     dik_g =""
     dik_t = ""
     sem_exe ="SemExp"
@@ -133,7 +142,7 @@ class Data():
     d_names = "//th[contains(text(),'district')]"
     t_head = "//th[contains(text(),'District Name')]"
     login_in = "//span[@class='span']"
-    SAR = "SAR"
+    SAR = "stdReport"
     Logout = "logout"
     Home_icon = "//i[@id='home']"
     select_district = 'myDistrict'
@@ -220,8 +229,8 @@ class Data():
     details = "//div[@class='col-sm-4']/span"
     # Dash board
     TAR = "tar"
-    SR = "sr"
-    CRC = "crcr"
+    SR = "semReport"
+    CRC = "crcReport"
 
     # xpath of Dashboard
 

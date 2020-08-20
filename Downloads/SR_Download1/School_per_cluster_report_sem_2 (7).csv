@@ -1,0 +1,6 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120008","Baherampura-1",24071200803,"Vasana -3","42.5 %","63.7 %","59.6 %","57.2 %","29.9 %","35.6 %","45.9 %",465
+2407,"Ahmedabad",240712,"Amc","2407120008","Baherampura-1",24071200805,"Vasana -5","43.7 %","73.2 %","59.7 %","36.3 %","41.3 %","39.2 %","44.0 %",389
+2407,"Ahmedabad",240712,"Amc","2407120008","Baherampura-1",24071200801,"Vasana -1","45.3 %","73.4 %","73.0 %","63.4 %","33.5 %","34.0 %","43.7 %",358
+2407,"Ahmedabad",240712,"Amc","2407120008","Baherampura-1",24071200930,"Elisbridge - 30","61.1 %","63.7 %","67.0 %","53.8 %","null %","null %","null %",234
+2407,"Ahmedabad",240712,"Amc","2407120008","Baherampura-1",24071200833,"Vasana School No. 8","63.8 %","72.8 %","69.2 %","53.1 %","null %","null %","null %",309

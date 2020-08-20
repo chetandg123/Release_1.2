@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <style>body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	/* do not increase min-width as some may use split screens */
+	min-width: 800px;
+	color: #999;
+}
+
+h1 {
+	font-size: 24px;
+	color: black;
+}
+
+h2 {
+	font-size: 16px;
+	color: black;
+}
+
+p {
+    color: black;
+}
+
+a {
+	color: #999;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+
+#environment td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+}
+
+#environment tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed, .passed .col-result {
+	color: green;
+}
+span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
+	color: orange;
+}
+span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
+	color: red;
+}
+
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+
+#results-table {
+	border: 1px solid #e6e6e6;
+	color: #999;
+	font-size: 12px;
+	width: 100%
+}
+
+#results-table th, #results-table td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+	text-align: left
+}
+#results-table th {
+	font-weight: bold
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+
+.log:only-child {
+	height: inherit
+}
+.log {
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	color: black;
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	height: 230px;
+	overflow-y: scroll;
+	padding: 5px;
+	white-space: pre-wrap
+}
+div.image {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.image img {
+	width: 320px
+}
+div.video {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.video video {
+	overflow: hidden;
+	width: 320px;
+    height: 240px;
+}
+.collapsed {
+	display: none;
+}
+.expander::after {
+	content: " (show details)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+.collapser::after {
+	content: " (hide details)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+	cursor: pointer;
+}
+
+.sort-icon {
+	font-size: 0px;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	/*triangle*/
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.inactive .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #E6E6E6;
+}
+
+.asc.active .sort-icon {
+	/*finish triangle*/
+	border-bottom: 8px solid #999;
+}
+
+.desc.active .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (extras.classList.contains("collapsed")) {
+            expandcollapse.classList.add("expander")
+        } else if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    sort_column(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+
+        if (key_a == key_b) return 0;
+
+        if (reversed) {
+            return (key_a < key_b ? 1 : -1);
+        } else {
+            return (key_a > key_b ? 1 : -1);
+        }
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>semester_regression.html</h1>
+    <p>Report generated on 20-Aug-2020 at 16:56:29 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.1.1</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>JAVA_HOME</td>
+        <td>/usr/lib/jvm/java-8-openjdk-amd64</td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{"pluggy": "0.13.1", "py": "1.9.0", "pytest": "6.0.1"}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Linux-5.3.0-1032-aws-x86_64-with-Ubuntu-18.04-bionic</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{"forked": "1.3.0", "html": "2.1.1", "metadata": "1.10.0", "xdist": "2.0.0"}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.6.9</td></tr></table>
+    <h2>Summary</h2>
+    <p>19 tests ran in 720.50 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">10 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">9 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable numeric" col="duration">Duration</th>
+          <th>Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_schools_per_cluster_csv_download2</td>
+          <td class="col-duration">0.23</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">[gw19] linux -- Python 3.6.9 /home/ubuntu/chetan/Release_1.2/venv/bin/python<br/><br/>self = &lt;SR.semester_report_regression_testing.cQube_Semester_Report testMethod=test_schools_per_cluster_csv_download2&gt;<br/><br/>    def test_schools_per_cluster_csv_download2(self):<br/>&gt;       self.driver = self.data.get_driver_SR_Download2()<br/><br/>SR/semester_report_regression_testing.py:305: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>reuse_func.py:566: in get_driver_SR_Download2<br/>    },options=options)<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:157: in __init__<br/>    self.start_session(capabilities, browser_profile)<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:252: in start_session<br/>    response = self.execute(Command.NEW_SESSION, parameters)<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:321: in execute<br/>    self.error_handler.check_response(response)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x7efe438dc6d8&gt;<br/>response = {&#x27;status&#x27;: 500, &#x27;value&#x27;: &#x27;{\n  &quot;value&quot;: {\n    &quot;stacktrace&quot;: &quot;org.openqa.selenium.WebDriverException: unknown error: C...wn\\nremote stacktrace: #0 0x55a78a558ea9 \\u003cunknown&gt;\\n&quot;,\n    &quot;error&quot;: &quot;unknown error&quot;\n  },\n  &quot;status&quot;: 13\n}&#x27;}<br/><br/>    def check_response(self, response):<br/>        &quot;&quot;&quot;<br/>        Checks that a JSON response from the WebDriver does not have an error.<br/>    <br/>        :Args:<br/>         - response - The JSON response from the WebDriver server as a dictionary<br/>           object.<br/>    <br/>        :Raises: If the response contains an error message.<br/>        &quot;&quot;&quot;<br/>        status = response.get(&#x27;status&#x27;, None)<br/>        if status is None or status == ErrorCode.SUCCESS:<br/>            return<br/>        value = None<br/>        message = response.get(&quot;message&quot;, &quot;&quot;)<br/>        screen = response.get(&quot;screen&quot;, &quot;&quot;)<br/>        stacktrace = None<br/>        if isinstance(status, int):<br/>            value_json = response.get(&#x27;value&#x27;, None)<br/>            if value_json and isinstance(value_json, basestring):<br/>                import json<br/>                try:<br/>                    value = json.loads(value_json)<br/>                    if len(value.keys()) == 1:<br/>                        value = value[&#x27;value&#x27;]<br/>                    status = value.get(&#x27;error&#x27;, None)<br/>                    if status is None:<br/>                        status = value[&quot;status&quot;]<br/>                        message = value[&quot;value&quot;]<br/>                        if not isinstance(message, basestring):<br/>                            value = message<br/>                            message = message.get(&#x27;message&#x27;)<br/>                    else:<br/>                        message = value.get(&#x27;message&#x27;, None)<br/>                except ValueError:<br/>                    pass<br/>    <br/>        exception_class = ErrorInResponseException<br/>        if status in ErrorCode.NO_SUCH_ELEMENT:<br/>            exception_class = NoSuchElementException<br/>        elif status in ErrorCode.NO_SUCH_FRAME:<br/>            exception_class = NoSuchFrameException<br/>        elif status in ErrorCode.NO_SUCH_WINDOW:<br/>            exception_class = NoSuchWindowException<br/>        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:<br/>            exception_class = StaleElementReferenceException<br/>        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:<br/>            exception_class = ElementNotVisibleException<br/>        elif status in ErrorCode.INVALID_ELEMENT_STATE:<br/>            exception_class = InvalidElementStateException<br/>        elif status in ErrorCode.INVALID_SELECTOR \<br/>                or status in ErrorCode.INVALID_XPATH_SELECTOR \<br/>                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:<br/>            exception_class = InvalidSelectorException<br/>        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:<br/>            exception_class = ElementNotSelectableException<br/>        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:<br/>            exception_class = ElementNotInteractableException<br/>        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:<br/>            exception_class = InvalidCookieDomainException<br/>        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:<br/>            exception_class = UnableToSetCookieException<br/>        elif status in ErrorCode.TIMEOUT:<br/>            exception_class = TimeoutException<br/>        elif status in ErrorCode.SCRIPT_TIMEOUT:<br/>            exception_class = TimeoutException<br/>        elif status in ErrorCode.UNKNOWN_ERROR:<br/>            exception_class = WebDriverException<br/>        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:<br/>            exception_class = UnexpectedAlertPresentException<br/>        elif status in ErrorCode.NO_ALERT_OPEN:<br/>            exception_class = NoAlertPresentException<br/>        elif status in ErrorCode.IME_NOT_AVAILABLE:<br/>            exception_class = ImeNotAvailableException<br/>        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:<br/>            exception_class = ImeActivationFailedException<br/>        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:<br/>            exception_class = MoveTargetOutOfBoundsException<br/>        elif status in ErrorCode.JAVASCRIPT_ERROR:<br/>            exception_class = JavascriptException<br/>        elif status in ErrorCode.SESSION_NOT_CREATED:<br/>            exception_class = SessionNotCreatedException<br/>        elif status in ErrorCode.INVALID_ARGUMENT:<br/>            exception_class = InvalidArgumentException<br/>        elif status in ErrorCode.NO_SUCH_COOKIE:<br/>            exception_class = NoSuchCookieException<br/>        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:<br/>            exception_class = ScreenshotException<br/>        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:<br/>            exception_class = ElementClickInterceptedException<br/>        elif status in ErrorCode.INSECURE_CERTIFICATE:<br/>            exception_class = InsecureCertificateException<br/>        elif status in ErrorCode.INVALID_COORDINATES:<br/>            exception_class = InvalidCoordinatesException<br/>        elif status in ErrorCode.INVALID_SESSION_ID:<br/>            exception_class = InvalidSessionIdException<br/>        elif status in ErrorCode.UNKNOWN_METHOD:<br/>            exception_class = UnknownMethodException<br/>        else:<br/>            exception_class = WebDriverException<br/>        if value == &#x27;&#x27; or value is None:<br/>            value = response[&#x27;value&#x27;]<br/>        if isinstance(value, basestring):<br/>            if exception_class == ErrorInResponseException:<br/>                raise exception_class(response, value)<br/>            raise exception_class(value)<br/>        if message == &quot;&quot; and &#x27;message&#x27; in value:<br/>            message = value[&#x27;message&#x27;]<br/>    <br/>        screen = None<br/>        if &#x27;screen&#x27; in value:<br/>            screen = value[&#x27;screen&#x27;]<br/>    <br/>        stacktrace = None<br/>        if &#x27;stackTrace&#x27; in value and value[&#x27;stackTrace&#x27;]:<br/>            stacktrace = []<br/>            try:<br/>                for frame in value[&#x27;stackTrace&#x27;]:<br/>                    line = self._value_or_default(frame, &#x27;lineNumber&#x27;, &#x27;&#x27;)<br/>                    file = self._value_or_default(frame, &#x27;fileName&#x27;, &#x27;&lt;anonymous&gt;&#x27;)<br/>                    if line:<br/>                        file = &quot;%s:%s&quot; % (file, line)<br/>                    meth = self._value_or_default(frame, &#x27;methodName&#x27;, &#x27;&lt;anonymous&gt;&#x27;)<br/>                    if &#x27;className&#x27; in frame:<br/>                        meth = &quot;%s.%s&quot; % (frame[&#x27;className&#x27;], meth)<br/>                    msg = &quot;    at %s (%s)&quot;<br/>                    msg = msg % (meth, file)<br/>                    stacktrace.append(msg)<br/>            except TypeError:<br/>                pass<br/>        if exception_class == ErrorInResponseException:<br/>            raise exception_class(response, message)<br/>        elif exception_class == UnexpectedAlertPresentException:<br/>            alert_text = None<br/>            if &#x27;data&#x27; in value:<br/>                alert_text = value[&#x27;data&#x27;].get(&#x27;text&#x27;)<br/>            elif &#x27;alert&#x27; in value:<br/>                alert_text = value[&#x27;alert&#x27;].get(&#x27;text&#x27;)<br/>            raise exception_class(message, screen, stacktrace, alert_text)<br/>&gt;       raise exception_class(message, screen, stacktrace)<br/><span class="error">E       selenium.common.exceptions.WebDriverException: Message: unknown error: Chrome failed to start: exited abnormally.</span><br/><span class="error">E         (unknown error: DevToolsActivePort file doesn&#x27;t exist)</span><br/><span class="error">E         (The process started from chrome location /usr/bin/google-chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)</span><br/><span class="error">E       Build info: version: &#x27;3.141.59&#x27;, revision: &#x27;e82be7d358&#x27;, time: &#x27;2018-11-14T08:25:53&#x27;</span><br/><span class="error">E       System info: host: &#x27;ip-172-31-20-166&#x27;, ip: &#x27;172.31.20.166&#x27;, os.name: &#x27;Linux&#x27;, os.arch: &#x27;amd64&#x27;, os.version: &#x27;5.3.0-1032-aws&#x27;, java.version: &#x27;1.8.0_265&#x27;</span><br/><span class="error">E       Driver info: driver.version: unknown</span><br/><span class="error">E       remote stacktrace: #0 0x55a78a558ea9 &lt;unknown&gt;</span><br/><span class="error">E       </span><br/><span class="error">E       Stacktrace:</span><br/><span class="error">E           at sun.reflect.GeneratedConstructorAccessor47.newInstance (None:-1)</span><br/><span class="error">E           at sun.reflect.DelegatingConstructorAccessorImpl.newInstance (DelegatingConstructorAccessorImpl.java:45)</span><br/><span class="error">E           at java.lang.reflect.Constructor.newInstance (Constructor.java:423)</span><br/><span class="error">E           at org.openqa.selenium.remote.W3CHandshakeResponse.lambda$errorHandler$0 (W3CHandshakeResponse.java:62)</span><br/><span class="error">E           at org.openqa.selenium.remote.HandshakeResponse.lambda$getResponseFunction$0 (HandshakeResponse.java:30)</span><br/><span class="error">E           at org.openqa.selenium.remote.ProtocolHandshake.lambda$createSession$0 (ProtocolHandshake.java:126)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.Spliterators$ArraySpliterator.tryAdvance (Spliterators.java:958)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.forEachWithCancel (ReferencePipeline.java:126)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyIntoWithCancel (AbstractPipeline.java:499)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyInto (AbstractPipeline.java:486)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.wrapAndCopyInto (AbstractPipeline.java:472)</span><br/><span class="error">E           at java.util.stream.FindOps$FindOp.evaluateSequential (FindOps.java:152)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.evaluate (AbstractPipeline.java:234)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.findFirst (ReferencePipeline.java:531)</span><br/><span class="error">E           at org.openqa.selenium.remote.ProtocolHandshake.createSession (ProtocolHandshake.java:128)</span><br/><span class="error">E           at org.openqa.selenium.remote.ProtocolHandshake.createSession (ProtocolHandshake.java:74)</span><br/><span class="error">E           at org.openqa.selenium.grid.session.remote.RemoteSession$Factory.performHandshake (RemoteSession.java:147)</span><br/><span class="error">E           at org.openqa.selenium.grid.session.remote.ServicedSession$Factory.apply (ServicedSession.java:161)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.ActiveSessionFactory.lambda$apply$12 (ActiveSessionFactory.java:180)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$11$1.accept (ReferencePipeline.java:440)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$2$1.accept (ReferencePipeline.java:175)</span><br/><span class="error">E           at java.util.Spliterators$ArraySpliterator.tryAdvance (Spliterators.java:958)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.forEachWithCancel (ReferencePipeline.java:126)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyIntoWithCancel (AbstractPipeline.java:499)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyInto (AbstractPipeline.java:486)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.wrapAndCopyInto (AbstractPipeline.java:472)</span><br/><span class="error">E           at java.util.stream.FindOps$FindOp.evaluateSequential (FindOps.java:152)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.evaluate (AbstractPipeline.java:234)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.findFirst (ReferencePipeline.java:531)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.ActiveSessionFactory.apply (ActiveSessionFactory.java:183)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.NewSessionPipeline.lambda$null$2 (NewSessionPipeline.java:66)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$2$1.accept (ReferencePipeline.java:175)</span><br/><span class="error">E           at java.util.Collections$2.tryAdvance (Collections.java:4719)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.forEachWithCancel (ReferencePipeline.java:126)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyIntoWithCancel (AbstractPipeline.java:499)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyInto (AbstractPipeline.java:486)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.wrapAndCopyInto (AbstractPipeline.java:472)</span><br/><span class="error">E           at java.util.stream.FindOps$FindOp.evaluateSequential (FindOps.java:152)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.evaluate (AbstractPipeline.java:234)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.findFirst (ReferencePipeline.java:531)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.NewSessionPipeline.lambda$createNewSession$3 (NewSessionPipeline.java:69)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.DistinctOps$1$2.accept (DistinctOps.java:175)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$2$1.accept (ReferencePipeline.java:175)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$2$1.accept (ReferencePipeline.java:175)</span><br/><span class="error">E           at java.util.stream.Streams$StreamBuilderImpl.tryAdvance (Streams.java:405)</span><br/><span class="error">E           at java.util.stream.Streams$ConcatSpliterator.tryAdvance (Streams.java:728)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.forEachWithCancel (ReferencePipeline.java:126)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyIntoWithCancel (AbstractPipeline.java:499)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyInto (AbstractPipeline.java:486)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.wrapAndCopyInto (AbstractPipeline.java:472)</span><br/><span class="error">E           at java.util.stream.FindOps$FindOp.evaluateSequential (FindOps.java:152)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.evaluate (AbstractPipeline.java:234)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.findFirst (ReferencePipeline.java:531)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.NewSessionPipeline.createNewSession (NewSessionPipeline.java:72)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.commandhandler.BeginSession.execute (BeginSession.java:65)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.WebDriverServlet.lambda$handle$0 (WebDriverServlet.java:235)</span><br/><span class="error">E           at java.util.concurrent.Executors$RunnableAdapter.call (Executors.java:511)</span><br/><span class="error">E           at java.util.concurrent.FutureTask.run (FutureTask.java:266)</span><br/><span class="error">E           at java.util.concurrent.ThreadPoolExecutor.runWorker (ThreadPoolExecutor.java:1149)</span><br/><span class="error">E           at java.util.concurrent.ThreadPoolExecutor$Worker.run (ThreadPoolExecutor.java:624)</span><br/><span class="error">E           at java.lang.Thread.run (Thread.java:748)</span><br/><br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py:242: WebDriverException<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_schools_per_cluster_csv_download3</td>
+          <td class="col-duration">0.25</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">[gw17] linux -- Python 3.6.9 /home/ubuntu/chetan/Release_1.2/venv/bin/python<br/><br/>self = &lt;SR.semester_report_regression_testing.cQube_Semester_Report testMethod=test_schools_per_cluster_csv_download3&gt;<br/><br/>    def test_schools_per_cluster_csv_download3(self):<br/>&gt;       self.driver = self.data.get_driver_SR_Download3()<br/><br/>SR/semester_report_regression_testing.py:323: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>reuse_func.py:577: in get_driver_SR_Download3<br/>    },options=options)<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:157: in __init__<br/>    self.start_session(capabilities, browser_profile)<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:252: in start_session<br/>    response = self.execute(Command.NEW_SESSION, parameters)<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:321: in execute<br/>    self.error_handler.check_response(response)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x7f3f419516d8&gt;<br/>response = {&#x27;status&#x27;: 500, &#x27;value&#x27;: &#x27;{\n  &quot;value&quot;: {\n    &quot;stacktrace&quot;: &quot;org.openqa.selenium.WebDriverException: unknown error: C...wn\\nremote stacktrace: #0 0x561a03569ea9 \\u003cunknown&gt;\\n&quot;,\n    &quot;error&quot;: &quot;unknown error&quot;\n  },\n  &quot;status&quot;: 13\n}&#x27;}<br/><br/>    def check_response(self, response):<br/>        &quot;&quot;&quot;<br/>        Checks that a JSON response from the WebDriver does not have an error.<br/>    <br/>        :Args:<br/>         - response - The JSON response from the WebDriver server as a dictionary<br/>           object.<br/>    <br/>        :Raises: If the response contains an error message.<br/>        &quot;&quot;&quot;<br/>        status = response.get(&#x27;status&#x27;, None)<br/>        if status is None or status == ErrorCode.SUCCESS:<br/>            return<br/>        value = None<br/>        message = response.get(&quot;message&quot;, &quot;&quot;)<br/>        screen = response.get(&quot;screen&quot;, &quot;&quot;)<br/>        stacktrace = None<br/>        if isinstance(status, int):<br/>            value_json = response.get(&#x27;value&#x27;, None)<br/>            if value_json and isinstance(value_json, basestring):<br/>                import json<br/>                try:<br/>                    value = json.loads(value_json)<br/>                    if len(value.keys()) == 1:<br/>                        value = value[&#x27;value&#x27;]<br/>                    status = value.get(&#x27;error&#x27;, None)<br/>                    if status is None:<br/>                        status = value[&quot;status&quot;]<br/>                        message = value[&quot;value&quot;]<br/>                        if not isinstance(message, basestring):<br/>                            value = message<br/>                            message = message.get(&#x27;message&#x27;)<br/>                    else:<br/>                        message = value.get(&#x27;message&#x27;, None)<br/>                except ValueError:<br/>                    pass<br/>    <br/>        exception_class = ErrorInResponseException<br/>        if status in ErrorCode.NO_SUCH_ELEMENT:<br/>            exception_class = NoSuchElementException<br/>        elif status in ErrorCode.NO_SUCH_FRAME:<br/>            exception_class = NoSuchFrameException<br/>        elif status in ErrorCode.NO_SUCH_WINDOW:<br/>            exception_class = NoSuchWindowException<br/>        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:<br/>            exception_class = StaleElementReferenceException<br/>        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:<br/>            exception_class = ElementNotVisibleException<br/>        elif status in ErrorCode.INVALID_ELEMENT_STATE:<br/>            exception_class = InvalidElementStateException<br/>        elif status in ErrorCode.INVALID_SELECTOR \<br/>                or status in ErrorCode.INVALID_XPATH_SELECTOR \<br/>                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:<br/>            exception_class = InvalidSelectorException<br/>        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:<br/>            exception_class = ElementNotSelectableException<br/>        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:<br/>            exception_class = ElementNotInteractableException<br/>        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:<br/>            exception_class = InvalidCookieDomainException<br/>        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:<br/>            exception_class = UnableToSetCookieException<br/>        elif status in ErrorCode.TIMEOUT:<br/>            exception_class = TimeoutException<br/>        elif status in ErrorCode.SCRIPT_TIMEOUT:<br/>            exception_class = TimeoutException<br/>        elif status in ErrorCode.UNKNOWN_ERROR:<br/>            exception_class = WebDriverException<br/>        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:<br/>            exception_class = UnexpectedAlertPresentException<br/>        elif status in ErrorCode.NO_ALERT_OPEN:<br/>            exception_class = NoAlertPresentException<br/>        elif status in ErrorCode.IME_NOT_AVAILABLE:<br/>            exception_class = ImeNotAvailableException<br/>        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:<br/>            exception_class = ImeActivationFailedException<br/>        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:<br/>            exception_class = MoveTargetOutOfBoundsException<br/>        elif status in ErrorCode.JAVASCRIPT_ERROR:<br/>            exception_class = JavascriptException<br/>        elif status in ErrorCode.SESSION_NOT_CREATED:<br/>            exception_class = SessionNotCreatedException<br/>        elif status in ErrorCode.INVALID_ARGUMENT:<br/>            exception_class = InvalidArgumentException<br/>        elif status in ErrorCode.NO_SUCH_COOKIE:<br/>            exception_class = NoSuchCookieException<br/>        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:<br/>            exception_class = ScreenshotException<br/>        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:<br/>            exception_class = ElementClickInterceptedException<br/>        elif status in ErrorCode.INSECURE_CERTIFICATE:<br/>            exception_class = InsecureCertificateException<br/>        elif status in ErrorCode.INVALID_COORDINATES:<br/>            exception_class = InvalidCoordinatesException<br/>        elif status in ErrorCode.INVALID_SESSION_ID:<br/>            exception_class = InvalidSessionIdException<br/>        elif status in ErrorCode.UNKNOWN_METHOD:<br/>            exception_class = UnknownMethodException<br/>        else:<br/>            exception_class = WebDriverException<br/>        if value == &#x27;&#x27; or value is None:<br/>            value = response[&#x27;value&#x27;]<br/>        if isinstance(value, basestring):<br/>            if exception_class == ErrorInResponseException:<br/>                raise exception_class(response, value)<br/>            raise exception_class(value)<br/>        if message == &quot;&quot; and &#x27;message&#x27; in value:<br/>            message = value[&#x27;message&#x27;]<br/>    <br/>        screen = None<br/>        if &#x27;screen&#x27; in value:<br/>            screen = value[&#x27;screen&#x27;]<br/>    <br/>        stacktrace = None<br/>        if &#x27;stackTrace&#x27; in value and value[&#x27;stackTrace&#x27;]:<br/>            stacktrace = []<br/>            try:<br/>                for frame in value[&#x27;stackTrace&#x27;]:<br/>                    line = self._value_or_default(frame, &#x27;lineNumber&#x27;, &#x27;&#x27;)<br/>                    file = self._value_or_default(frame, &#x27;fileName&#x27;, &#x27;&lt;anonymous&gt;&#x27;)<br/>                    if line:<br/>                        file = &quot;%s:%s&quot; % (file, line)<br/>                    meth = self._value_or_default(frame, &#x27;methodName&#x27;, &#x27;&lt;anonymous&gt;&#x27;)<br/>                    if &#x27;className&#x27; in frame:<br/>                        meth = &quot;%s.%s&quot; % (frame[&#x27;className&#x27;], meth)<br/>                    msg = &quot;    at %s (%s)&quot;<br/>                    msg = msg % (meth, file)<br/>                    stacktrace.append(msg)<br/>            except TypeError:<br/>                pass<br/>        if exception_class == ErrorInResponseException:<br/>            raise exception_class(response, message)<br/>        elif exception_class == UnexpectedAlertPresentException:<br/>            alert_text = None<br/>            if &#x27;data&#x27; in value:<br/>                alert_text = value[&#x27;data&#x27;].get(&#x27;text&#x27;)<br/>            elif &#x27;alert&#x27; in value:<br/>                alert_text = value[&#x27;alert&#x27;].get(&#x27;text&#x27;)<br/>            raise exception_class(message, screen, stacktrace, alert_text)<br/>&gt;       raise exception_class(message, screen, stacktrace)<br/><span class="error">E       selenium.common.exceptions.WebDriverException: Message: unknown error: Chrome failed to start: exited abnormally.</span><br/><span class="error">E         (unknown error: DevToolsActivePort file doesn&#x27;t exist)</span><br/><span class="error">E         (The process started from chrome location /usr/bin/google-chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)</span><br/><span class="error">E       Build info: version: &#x27;3.141.59&#x27;, revision: &#x27;e82be7d358&#x27;, time: &#x27;2018-11-14T08:25:53&#x27;</span><br/><span class="error">E       System info: host: &#x27;ip-172-31-20-166&#x27;, ip: &#x27;172.31.20.166&#x27;, os.name: &#x27;Linux&#x27;, os.arch: &#x27;amd64&#x27;, os.version: &#x27;5.3.0-1032-aws&#x27;, java.version: &#x27;1.8.0_265&#x27;</span><br/><span class="error">E       Driver info: driver.version: unknown</span><br/><span class="error">E       remote stacktrace: #0 0x561a03569ea9 &lt;unknown&gt;</span><br/><span class="error">E       </span><br/><span class="error">E       Stacktrace:</span><br/><span class="error">E           at sun.reflect.GeneratedConstructorAccessor47.newInstance (None:-1)</span><br/><span class="error">E           at sun.reflect.DelegatingConstructorAccessorImpl.newInstance (DelegatingConstructorAccessorImpl.java:45)</span><br/><span class="error">E           at java.lang.reflect.Constructor.newInstance (Constructor.java:423)</span><br/><span class="error">E           at org.openqa.selenium.remote.W3CHandshakeResponse.lambda$errorHandler$0 (W3CHandshakeResponse.java:62)</span><br/><span class="error">E           at org.openqa.selenium.remote.HandshakeResponse.lambda$getResponseFunction$0 (HandshakeResponse.java:30)</span><br/><span class="error">E           at org.openqa.selenium.remote.ProtocolHandshake.lambda$createSession$0 (ProtocolHandshake.java:126)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.Spliterators$ArraySpliterator.tryAdvance (Spliterators.java:958)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.forEachWithCancel (ReferencePipeline.java:126)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyIntoWithCancel (AbstractPipeline.java:499)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyInto (AbstractPipeline.java:486)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.wrapAndCopyInto (AbstractPipeline.java:472)</span><br/><span class="error">E           at java.util.stream.FindOps$FindOp.evaluateSequential (FindOps.java:152)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.evaluate (AbstractPipeline.java:234)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.findFirst (ReferencePipeline.java:531)</span><br/><span class="error">E           at org.openqa.selenium.remote.ProtocolHandshake.createSession (ProtocolHandshake.java:128)</span><br/><span class="error">E           at org.openqa.selenium.remote.ProtocolHandshake.createSession (ProtocolHandshake.java:74)</span><br/><span class="error">E           at org.openqa.selenium.grid.session.remote.RemoteSession$Factory.performHandshake (RemoteSession.java:147)</span><br/><span class="error">E           at org.openqa.selenium.grid.session.remote.ServicedSession$Factory.apply (ServicedSession.java:161)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.ActiveSessionFactory.lambda$apply$12 (ActiveSessionFactory.java:180)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$11$1.accept (ReferencePipeline.java:440)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$2$1.accept (ReferencePipeline.java:175)</span><br/><span class="error">E           at java.util.Spliterators$ArraySpliterator.tryAdvance (Spliterators.java:958)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.forEachWithCancel (ReferencePipeline.java:126)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyIntoWithCancel (AbstractPipeline.java:499)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyInto (AbstractPipeline.java:486)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.wrapAndCopyInto (AbstractPipeline.java:472)</span><br/><span class="error">E           at java.util.stream.FindOps$FindOp.evaluateSequential (FindOps.java:152)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.evaluate (AbstractPipeline.java:234)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.findFirst (ReferencePipeline.java:531)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.ActiveSessionFactory.apply (ActiveSessionFactory.java:183)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.NewSessionPipeline.lambda$null$2 (NewSessionPipeline.java:66)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$2$1.accept (ReferencePipeline.java:175)</span><br/><span class="error">E           at java.util.Collections$2.tryAdvance (Collections.java:4719)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.forEachWithCancel (ReferencePipeline.java:126)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyIntoWithCancel (AbstractPipeline.java:499)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyInto (AbstractPipeline.java:486)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.wrapAndCopyInto (AbstractPipeline.java:472)</span><br/><span class="error">E           at java.util.stream.FindOps$FindOp.evaluateSequential (FindOps.java:152)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.evaluate (AbstractPipeline.java:234)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.findFirst (ReferencePipeline.java:531)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.NewSessionPipeline.lambda$createNewSession$3 (NewSessionPipeline.java:69)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.DistinctOps$1$2.accept (DistinctOps.java:175)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$2$1.accept (ReferencePipeline.java:175)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$3$1.accept (ReferencePipeline.java:193)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline$2$1.accept (ReferencePipeline.java:175)</span><br/><span class="error">E           at java.util.stream.Streams$StreamBuilderImpl.tryAdvance (Streams.java:405)</span><br/><span class="error">E           at java.util.stream.Streams$ConcatSpliterator.tryAdvance (Streams.java:728)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.forEachWithCancel (ReferencePipeline.java:126)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyIntoWithCancel (AbstractPipeline.java:499)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.copyInto (AbstractPipeline.java:486)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.wrapAndCopyInto (AbstractPipeline.java:472)</span><br/><span class="error">E           at java.util.stream.FindOps$FindOp.evaluateSequential (FindOps.java:152)</span><br/><span class="error">E           at java.util.stream.AbstractPipeline.evaluate (AbstractPipeline.java:234)</span><br/><span class="error">E           at java.util.stream.ReferencePipeline.findFirst (ReferencePipeline.java:531)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.NewSessionPipeline.createNewSession (NewSessionPipeline.java:72)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.commandhandler.BeginSession.execute (BeginSession.java:65)</span><br/><span class="error">E           at org.openqa.selenium.remote.server.WebDriverServlet.lambda$handle$0 (WebDriverServlet.java:235)</span><br/><span class="error">E           at java.util.concurrent.Executors$RunnableAdapter.call (Executors.java:511)</span><br/><span class="error">E           at java.util.concurrent.FutureTask.run (FutureTask.java:266)</span><br/><span class="error">E           at java.util.concurrent.ThreadPoolExecutor.runWorker (ThreadPoolExecutor.java:1149)</span><br/><span class="error">E           at java.util.concurrent.ThreadPoolExecutor$Worker.run (ThreadPoolExecutor.java:624)</span><br/><span class="error">E           at java.lang.Thread.run (Thread.java:748)</span><br/><br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py:242: WebDriverException<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_blockwise_csv_download</td>
+          <td class="col-duration">17.44</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">[gw1] linux -- Python 3.6.9 /home/ubuntu/chetan/Release_1.2/venv/bin/python<br/><br/>self = &lt;SR.semester_report_regression_testing.cQube_Semester_Report testMethod=test_blockwise_csv_download&gt;<br/><br/>    def test_blockwise_csv_download(self):<br/>        self.tests.pop()<br/>        self.logger.info(&quot;test_blockwise_csv_download is running&quot; + &quot; &quot; + &quot;Total :&quot; + &quot; &quot; + str(<br/>            self.total_tests) + &quot; &quot; + &quot;Remaining :&quot; + &quot; &quot; + str(len(self.tests) - 1))<br/>    <br/>        csv = BlockwiseCsv(self.driver)<br/>        result = csv.click_download_icon_of_blocks()<br/>        if result == &quot;File Not Downloaded&quot;:<br/>&gt;           raise self.failureException(result)<br/><span class="error">E           AssertionError: File Not Downloaded</span><br/><br/>SR/semester_report_regression_testing.py:160: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_click_on_semester_report</td>
+          <td class="col-duration">30.16</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">[gw7] linux -- Python 3.6.9 /home/ubuntu/chetan/Release_1.2/venv/bin/python<br/><br/>self = &lt;SR.semester_report_regression_testing.cQube_Semester_Report testMethod=test_click_on_semester_report&gt;<br/><br/>    def test_click_on_semester_report(self):<br/>        self.tests.pop()<br/>        self.logger.info(&quot;test_click_on_student_attendence_report is running&quot; + &quot; &quot; + &quot;Total :&quot; + &quot; &quot; + str(<br/>            self.total_tests) + &quot; &quot; + &quot;Remaining :&quot; + &quot; &quot; + str(len(self.tests) - 1))<br/>    <br/>        sr = SemesterReport(self.driver)<br/>&gt;       result = sr.click_on_semester()<br/><br/>SR/semester_report_regression_testing.py:61: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>SR/click_on_semester_report.py:13: in click_on_semester<br/>    self.driver.find_element_by_xpath(Data.sr_by_xpath).click()<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:394: in find_element_by_xpath<br/>    return self.find_element(by=By.XPATH, value=xpath)<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:978: in find_element<br/>    &#x27;value&#x27;: value})[&#x27;value&#x27;]<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:321: in execute<br/>    self.error_handler.check_response(response)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x7f1510e04550&gt;<br/>response = {&#x27;status&#x27;: 404, &#x27;value&#x27;: &#x27;{&quot;value&quot;:{&quot;error&quot;:&quot;no such element&quot;,&quot;message&quot;:&quot;no such element: Unable to locate element: {\...\&quot;//*[@id=\&#x27;sr\&#x27;]\\&quot;}\\n  (Session info: chrome=84.0.4147.135)&quot;,&quot;stacktrace&quot;:&quot;#0 0x560b79699ea9 \\u003Cunknown&gt;\\n&quot;}}&#x27;}<br/><br/>    def check_response(self, response):<br/>        &quot;&quot;&quot;<br/>        Checks that a JSON response from the WebDriver does not have an error.<br/>    <br/>        :Args:<br/>         - response - The JSON response from the WebDriver server as a dictionary<br/>           object.<br/>    <br/>        :Raises: If the response contains an error message.<br/>        &quot;&quot;&quot;<br/>        status = response.get(&#x27;status&#x27;, None)<br/>        if status is None or status == ErrorCode.SUCCESS:<br/>            return<br/>        value = None<br/>        message = response.get(&quot;message&quot;, &quot;&quot;)<br/>        screen = response.get(&quot;screen&quot;, &quot;&quot;)<br/>        stacktrace = None<br/>        if isinstance(status, int):<br/>            value_json = response.get(&#x27;value&#x27;, None)<br/>            if value_json and isinstance(value_json, basestring):<br/>                import json<br/>                try:<br/>                    value = json.loads(value_json)<br/>                    if len(value.keys()) == 1:<br/>                        value = value[&#x27;value&#x27;]<br/>                    status = value.get(&#x27;error&#x27;, None)<br/>                    if status is None:<br/>                        status = value[&quot;status&quot;]<br/>                        message = value[&quot;value&quot;]<br/>                        if not isinstance(message, basestring):<br/>                            value = message<br/>                            message = message.get(&#x27;message&#x27;)<br/>                    else:<br/>                        message = value.get(&#x27;message&#x27;, None)<br/>                except ValueError:<br/>                    pass<br/>    <br/>        exception_class = ErrorInResponseException<br/>        if status in ErrorCode.NO_SUCH_ELEMENT:<br/>            exception_class = NoSuchElementException<br/>        elif status in ErrorCode.NO_SUCH_FRAME:<br/>            exception_class = NoSuchFrameException<br/>        elif status in ErrorCode.NO_SUCH_WINDOW:<br/>            exception_class = NoSuchWindowException<br/>        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:<br/>            exception_class = StaleElementReferenceException<br/>        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:<br/>            exception_class = ElementNotVisibleException<br/>        elif status in ErrorCode.INVALID_ELEMENT_STATE:<br/>            exception_class = InvalidElementStateException<br/>        elif status in ErrorCode.INVALID_SELECTOR \<br/>                or status in ErrorCode.INVALID_XPATH_SELECTOR \<br/>                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:<br/>            exception_class = InvalidSelectorException<br/>        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:<br/>            exception_class = ElementNotSelectableException<br/>        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:<br/>            exception_class = ElementNotInteractableException<br/>        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:<br/>            exception_class = InvalidCookieDomainException<br/>        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:<br/>            exception_class = UnableToSetCookieException<br/>        elif status in ErrorCode.TIMEOUT:<br/>            exception_class = TimeoutException<br/>        elif status in ErrorCode.SCRIPT_TIMEOUT:<br/>            exception_class = TimeoutException<br/>        elif status in ErrorCode.UNKNOWN_ERROR:<br/>            exception_class = WebDriverException<br/>        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:<br/>            exception_class = UnexpectedAlertPresentException<br/>        elif status in ErrorCode.NO_ALERT_OPEN:<br/>            exception_class = NoAlertPresentException<br/>        elif status in ErrorCode.IME_NOT_AVAILABLE:<br/>            exception_class = ImeNotAvailableException<br/>        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:<br/>            exception_class = ImeActivationFailedException<br/>        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:<br/>            exception_class = MoveTargetOutOfBoundsException<br/>        elif status in ErrorCode.JAVASCRIPT_ERROR:<br/>            exception_class = JavascriptException<br/>        elif status in ErrorCode.SESSION_NOT_CREATED:<br/>            exception_class = SessionNotCreatedException<br/>        elif status in ErrorCode.INVALID_ARGUMENT:<br/>            exception_class = InvalidArgumentException<br/>        elif status in ErrorCode.NO_SUCH_COOKIE:<br/>            exception_class = NoSuchCookieException<br/>        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:<br/>            exception_class = ScreenshotException<br/>        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:<br/>            exception_class = ElementClickInterceptedException<br/>        elif status in ErrorCode.INSECURE_CERTIFICATE:<br/>            exception_class = InsecureCertificateException<br/>        elif status in ErrorCode.INVALID_COORDINATES:<br/>            exception_class = InvalidCoordinatesException<br/>        elif status in ErrorCode.INVALID_SESSION_ID:<br/>            exception_class = InvalidSessionIdException<br/>        elif status in ErrorCode.UNKNOWN_METHOD:<br/>            exception_class = UnknownMethodException<br/>        else:<br/>            exception_class = WebDriverException<br/>        if value == &#x27;&#x27; or value is None:<br/>            value = response[&#x27;value&#x27;]<br/>        if isinstance(value, basestring):<br/>            if exception_class == ErrorInResponseException:<br/>                raise exception_class(response, value)<br/>            raise exception_class(value)<br/>        if message == &quot;&quot; and &#x27;message&#x27; in value:<br/>            message = value[&#x27;message&#x27;]<br/>    <br/>        screen = None<br/>        if &#x27;screen&#x27; in value:<br/>            screen = value[&#x27;screen&#x27;]<br/>    <br/>        stacktrace = None<br/>        if &#x27;stackTrace&#x27; in value and value[&#x27;stackTrace&#x27;]:<br/>            stacktrace = []<br/>            try:<br/>                for frame in value[&#x27;stackTrace&#x27;]:<br/>                    line = self._value_or_default(frame, &#x27;lineNumber&#x27;, &#x27;&#x27;)<br/>                    file = self._value_or_default(frame, &#x27;fileName&#x27;, &#x27;&lt;anonymous&gt;&#x27;)<br/>                    if line:<br/>                        file = &quot;%s:%s&quot; % (file, line)<br/>                    meth = self._value_or_default(frame, &#x27;methodName&#x27;, &#x27;&lt;anonymous&gt;&#x27;)<br/>                    if &#x27;className&#x27; in frame:<br/>                        meth = &quot;%s.%s&quot; % (frame[&#x27;className&#x27;], meth)<br/>                    msg = &quot;    at %s (%s)&quot;<br/>                    msg = msg % (meth, file)<br/>                    stacktrace.append(msg)<br/>            except TypeError:<br/>                pass<br/>        if exception_class == ErrorInResponseException:<br/>            raise exception_class(response, message)<br/>        elif exception_class == UnexpectedAlertPresentException:<br/>            alert_text = None<br/>            if &#x27;data&#x27; in value:<br/>                alert_text = value[&#x27;data&#x27;].get(&#x27;text&#x27;)<br/>            elif &#x27;alert&#x27; in value:<br/>                alert_text = value[&#x27;alert&#x27;].get(&#x27;text&#x27;)<br/>            raise exception_class(message, screen, stacktrace, alert_text)<br/>&gt;       raise exception_class(message, screen, stacktrace)<br/><span class="error">E       selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[@id=&#x27;sr&#x27;]&quot;}</span><br/><span class="error">E         (Session info: chrome=84.0.4147.135)</span><br/><br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py:242: NoSuchElementException<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_schoolwise_csv_download</td>
+          <td class="col-duration">31.24</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">[gw21] linux -- Python 3.6.9 /home/ubuntu/chetan/Release_1.2/venv/bin/python<br/><br/>self = &lt;SR.semester_report_regression_testing.cQube_Semester_Report testMethod=test_schoolwise_csv_download&gt;<br/><br/>    def test_schoolwise_csv_download(self):<br/>        self.tests.pop()<br/>        time.sleep(10)<br/>        self.logger.info(&quot;test_schoolwise_cv_download is running&quot; + &quot; &quot; + &quot;Total :&quot; + &quot; &quot; + str(<br/>            self.total_tests) + &quot; &quot; + &quot;Remaining :&quot; + &quot; &quot; + str(len(self.tests) - 1))<br/>    <br/>        csv = SchoolwiseCsv(self.driver)<br/>        result = csv.click_download_icon_of_schools()<br/>        if result == &quot;File Not Downloaded&quot;:<br/>&gt;           raise self.failureException(result)<br/><span class="error">E           AssertionError: File Not Downloaded</span><br/><br/>SR/semester_report_regression_testing.py:188: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_clusterwise_csv_download</td>
+          <td class="col-duration">33.83</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">[gw8] linux -- Python 3.6.9 /home/ubuntu/chetan/Release_1.2/venv/bin/python<br/><br/>self = &lt;SR.semester_report_regression_testing.cQube_Semester_Report testMethod=test_clusterwise_csv_download&gt;<br/><br/>    def test_clusterwise_csv_download(self):<br/>        self.tests.pop()<br/>        time.sleep(15)<br/>        self.logger.info(&quot;test_clusterwise_csv_download is running&quot; + &quot; &quot; + &quot;Total :&quot; + &quot; &quot; + str(<br/>            self.total_tests) + &quot; &quot; + &quot;Remaining :&quot; + &quot; &quot; + str(len(self.tests) - 1))<br/>    <br/>        csv = ClusterwiseCsv(self.driver)<br/>        result = csv.click_download_icon_of_clusters()<br/>        if result == &quot;File Not Downloaded&quot;:<br/>&gt;           raise self.failureException(result)<br/><span class="error">E           AssertionError: File Not Downloaded</span><br/><br/>SR/semester_report_regression_testing.py:174: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_click_on_dashboard</td>
+          <td class="col-duration">36.10</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">[gw6] linux -- Python 3.6.9 /home/ubuntu/chetan/Release_1.2/venv/bin/python<br/><br/>self = &lt;SR.semester_report_regression_testing.cQube_Semester_Report testMethod=test_click_on_dashboard&gt;<br/><br/>    def test_click_on_dashboard(self):<br/>        time.sleep(5)<br/>        self.tests.pop()<br/>        self.logger.info(&quot;test_click_on_dashboard is running&quot; + &quot; &quot; + &quot;Total :&quot; + &quot; &quot; + str(<br/>            self.total_tests) + &quot; &quot; + &quot;Remaining :&quot; + &quot; &quot; + str(len(self.tests) - 1))<br/>    <br/>        dashboard = Dashboard(self.driver)<br/>&gt;       dashboard.click_on_dashboard()<br/><br/>SR/semester_report_regression_testing.py:51: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>SR/click_on_dashboard.py:14: in click_on_dashboard<br/>    self.driver.find_element_by_xpath(Data.sr_by_xpath).click()<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:394: in find_element_by_xpath<br/>    return self.find_element(by=By.XPATH, value=xpath)<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:978: in find_element<br/>    &#x27;value&#x27;: value})[&#x27;value&#x27;]<br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/webdriver.py:321: in execute<br/>    self.error_handler.check_response(response)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x7f2e8d1b4438&gt;<br/>response = {&#x27;status&#x27;: 404, &#x27;value&#x27;: &#x27;{&quot;value&quot;:{&quot;error&quot;:&quot;no such element&quot;,&quot;message&quot;:&quot;no such element: Unable to locate element: {\...\&quot;//*[@id=\&#x27;sr\&#x27;]\\&quot;}\\n  (Session info: chrome=84.0.4147.135)&quot;,&quot;stacktrace&quot;:&quot;#0 0x565379688ea9 \\u003Cunknown&gt;\\n&quot;}}&#x27;}<br/><br/>    def check_response(self, response):<br/>        &quot;&quot;&quot;<br/>        Checks that a JSON response from the WebDriver does not have an error.<br/>    <br/>        :Args:<br/>         - response - The JSON response from the WebDriver server as a dictionary<br/>           object.<br/>    <br/>        :Raises: If the response contains an error message.<br/>        &quot;&quot;&quot;<br/>        status = response.get(&#x27;status&#x27;, None)<br/>        if status is None or status == ErrorCode.SUCCESS:<br/>            return<br/>        value = None<br/>        message = response.get(&quot;message&quot;, &quot;&quot;)<br/>        screen = response.get(&quot;screen&quot;, &quot;&quot;)<br/>        stacktrace = None<br/>        if isinstance(status, int):<br/>            value_json = response.get(&#x27;value&#x27;, None)<br/>            if value_json and isinstance(value_json, basestring):<br/>                import json<br/>                try:<br/>                    value = json.loads(value_json)<br/>                    if len(value.keys()) == 1:<br/>                        value = value[&#x27;value&#x27;]<br/>                    status = value.get(&#x27;error&#x27;, None)<br/>                    if status is None:<br/>                        status = value[&quot;status&quot;]<br/>                        message = value[&quot;value&quot;]<br/>                        if not isinstance(message, basestring):<br/>                            value = message<br/>                            message = message.get(&#x27;message&#x27;)<br/>                    else:<br/>                        message = value.get(&#x27;message&#x27;, None)<br/>                except ValueError:<br/>                    pass<br/>    <br/>        exception_class = ErrorInResponseException<br/>        if status in ErrorCode.NO_SUCH_ELEMENT:<br/>            exception_class = NoSuchElementException<br/>        elif status in ErrorCode.NO_SUCH_FRAME:<br/>            exception_class = NoSuchFrameException<br/>        elif status in ErrorCode.NO_SUCH_WINDOW:<br/>            exception_class = NoSuchWindowException<br/>        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:<br/>            exception_class = StaleElementReferenceException<br/>        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:<br/>            exception_class = ElementNotVisibleException<br/>        elif status in ErrorCode.INVALID_ELEMENT_STATE:<br/>            exception_class = InvalidElementStateException<br/>        elif status in ErrorCode.INVALID_SELECTOR \<br/>                or status in ErrorCode.INVALID_XPATH_SELECTOR \<br/>                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:<br/>            exception_class = InvalidSelectorException<br/>        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:<br/>            exception_class = ElementNotSelectableException<br/>        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:<br/>            exception_class = ElementNotInteractableException<br/>        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:<br/>            exception_class = InvalidCookieDomainException<br/>        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:<br/>            exception_class = UnableToSetCookieException<br/>        elif status in ErrorCode.TIMEOUT:<br/>            exception_class = TimeoutException<br/>        elif status in ErrorCode.SCRIPT_TIMEOUT:<br/>            exception_class = TimeoutException<br/>        elif status in ErrorCode.UNKNOWN_ERROR:<br/>            exception_class = WebDriverException<br/>        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:<br/>            exception_class = UnexpectedAlertPresentException<br/>        elif status in ErrorCode.NO_ALERT_OPEN:<br/>            exception_class = NoAlertPresentException<br/>        elif status in ErrorCode.IME_NOT_AVAILABLE:<br/>            exception_class = ImeNotAvailableException<br/>        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:<br/>            exception_class = ImeActivationFailedException<br/>        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:<br/>            exception_class = MoveTargetOutOfBoundsException<br/>        elif status in ErrorCode.JAVASCRIPT_ERROR:<br/>            exception_class = JavascriptException<br/>        elif status in ErrorCode.SESSION_NOT_CREATED:<br/>            exception_class = SessionNotCreatedException<br/>        elif status in ErrorCode.INVALID_ARGUMENT:<br/>            exception_class = InvalidArgumentException<br/>        elif status in ErrorCode.NO_SUCH_COOKIE:<br/>            exception_class = NoSuchCookieException<br/>        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:<br/>            exception_class = ScreenshotException<br/>        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:<br/>            exception_class = ElementClickInterceptedException<br/>        elif status in ErrorCode.INSECURE_CERTIFICATE:<br/>            exception_class = InsecureCertificateException<br/>        elif status in ErrorCode.INVALID_COORDINATES:<br/>            exception_class = InvalidCoordinatesException<br/>        elif status in ErrorCode.INVALID_SESSION_ID:<br/>            exception_class = InvalidSessionIdException<br/>        elif status in ErrorCode.UNKNOWN_METHOD:<br/>            exception_class = UnknownMethodException<br/>        else:<br/>            exception_class = WebDriverException<br/>        if value == &#x27;&#x27; or value is None:<br/>            value = response[&#x27;value&#x27;]<br/>        if isinstance(value, basestring):<br/>            if exception_class == ErrorInResponseException:<br/>                raise exception_class(response, value)<br/>            raise exception_class(value)<br/>        if message == &quot;&quot; and &#x27;message&#x27; in value:<br/>            message = value[&#x27;message&#x27;]<br/>    <br/>        screen = None<br/>        if &#x27;screen&#x27; in value:<br/>            screen = value[&#x27;screen&#x27;]<br/>    <br/>        stacktrace = None<br/>        if &#x27;stackTrace&#x27; in value and value[&#x27;stackTrace&#x27;]:<br/>            stacktrace = []<br/>            try:<br/>                for frame in value[&#x27;stackTrace&#x27;]:<br/>                    line = self._value_or_default(frame, &#x27;lineNumber&#x27;, &#x27;&#x27;)<br/>                    file = self._value_or_default(frame, &#x27;fileName&#x27;, &#x27;&lt;anonymous&gt;&#x27;)<br/>                    if line:<br/>                        file = &quot;%s:%s&quot; % (file, line)<br/>                    meth = self._value_or_default(frame, &#x27;methodName&#x27;, &#x27;&lt;anonymous&gt;&#x27;)<br/>                    if &#x27;className&#x27; in frame:<br/>                        meth = &quot;%s.%s&quot; % (frame[&#x27;className&#x27;], meth)<br/>                    msg = &quot;    at %s (%s)&quot;<br/>                    msg = msg % (meth, file)<br/>                    stacktrace.append(msg)<br/>            except TypeError:<br/>                pass<br/>        if exception_class == ErrorInResponseException:<br/>            raise exception_class(response, message)<br/>        elif exception_class == UnexpectedAlertPresentException:<br/>            alert_text = None<br/>            if &#x27;data&#x27; in value:<br/>                alert_text = value[&#x27;data&#x27;].get(&#x27;text&#x27;)<br/>            elif &#x27;alert&#x27; in value:<br/>                alert_text = value[&#x27;alert&#x27;].get(&#x27;text&#x27;)<br/>            raise exception_class(message, screen, stacktrace, alert_text)<br/>&gt;       raise exception_class(message, screen, stacktrace)<br/><span class="error">E       selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[@id=&#x27;sr&#x27;]&quot;}</span><br/><span class="error">E         (Session info: chrome=84.0.4147.135)</span><br/><br/>venv/lib/python3.6/site-packages/selenium/webdriver/remote/errorhandler.py:242: NoSuchElementException<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_districtwise_csv_download</td>
+          <td class="col-duration">53.31</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">[gw10] linux -- Python 3.6.9 /home/ubuntu/chetan/Release_1.2/venv/bin/python<br/><br/>self = &lt;SR.semester_report_regression_testing.cQube_Semester_Report testMethod=test_districtwise_csv_download&gt;<br/><br/>    def test_districtwise_csv_download(self):<br/>        self.tests.pop()<br/>        time.sleep(40)<br/>        self.logger.info(&quot;test_districtwise_csv_download is running&quot; + &quot; &quot; + &quot;Total :&quot; + &quot; &quot; + str(<br/>            self.total_tests) + &quot; &quot; + &quot;Remaining :&quot; + &quot; &quot; + str(len(self.tests) - 1))<br/>    <br/>        csv = DistrictwiseCsv(self.driver)<br/>        result = csv.click_download_icon_of_district()<br/>        if result == &quot;File Not Downloaded&quot;:<br/>&gt;           raise self.failureException(result)<br/><span class="error">E           AssertionError: File Not Downloaded</span><br/><br/>SR/semester_report_regression_testing.py:146: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_block_per_district_csv_download</td>
+          <td class="col-duration">285.50</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">[gw0] linux -- Python 3.6.9 /home/ubuntu/chetan/Release_1.2/venv/bin/python<br/><br/>self = &lt;SR.semester_report_regression_testing.cQube_Semester_Report testMethod=test_block_per_district_csv_download&gt;<br/><br/>    def test_block_per_district_csv_download(self):<br/>        self.tests.pop()<br/>        self.logger.info(&quot;test_block_per_district_csv_download is running&quot; + &quot; &quot; + &quot;Total :&quot; + &quot; &quot; + str(<br/>            self.total_tests) + &quot; &quot; + &quot;Remaining :&quot; + &quot; &quot; + str(len(self.tests) - 1))<br/>    <br/>        dist = DistrictCsvDownload(self.driver)<br/>        result = dist.check_districts_csv_download()<br/>&gt;       self.assertEqual(0, result, msg=&quot;Some files are not downloaded&quot;)<br/><span class="error">E       AssertionError: 0 != 32 : Some files are not downloaded</span><br/><br/>SR/semester_report_regression_testing.py:263: AssertionError<br/> ------------------------------Captured stdout call------------------------------ <br/>District Ahmedabad csv is not downloaded
+District Amreli csv is not downloaded
+District Anand csv is not downloaded
+District Aravalli csv is not downloaded
+District Banaskantha csv is not downloaded
+District Bharuch csv is not downloaded
+District Bhavnagar csv is not downloaded
+District Botad csv is not downloaded
+District Chhotaudepur csv is not downloaded
+District Devbhoomi Dwarka csv is not downloaded
+District Dohad csv is not downloaded
+District Gandhinagar csv is not downloaded
+District Gir Somnath csv is not downloaded
+District Jamnagar csv is not downloaded
+District Junagadh csv is not downloaded
+District Kachchh csv is not downloaded
+District Kheda csv is not downloaded
+District Mahesana csv is not downloaded
+District Mahisagar csv is not downloaded
+District Morbi csv is not downloaded
+District Narmada csv is not downloaded
+District Navsari csv is not downloaded
+District Panch Mahals csv is not downloaded
+District Patan csv is not downloaded
+District Rajkot csv is not downloaded
+District Sabar Kantha csv is not downloaded
+District Surat csv is not downloaded
+District Surendranagar csv is not downloaded
+District Tapi csv is not downloaded
+District The Dangs csv is not downloaded
+District Vadodara csv is not downloaded
+District Valsad csv is not downloaded
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_click_on_blocks</td>
+          <td class="col-duration">10.55</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Blocks button is working
+Markers are present on the map
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_click_on_clusters</td>
+          <td class="col-duration">8.10</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Clusters button is working
+Markers are present on the map
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_home_button</td>
+          <td class="col-duration">16.01</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>test_home_button is working
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_home_icon</td>
+          <td class="col-duration">11.70</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Home Icon is working
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_no_of_schools_is_equals_at_districts_blocks_clusters_schools</td>
+          <td class="col-duration">27.12</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Total number of schools equals on clicking of blocks,clusters,schools
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_logout</td>
+          <td class="col-duration">26.18</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Logout Functionality is working
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_total_no_of_students_is_equals_at_districts_blocks_clusters_schools</td>
+          <td class="col-duration">47.79</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Total number of students equals on clicking of blocks,clusters,schools
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_check_hyperlinks</td>
+          <td class="col-duration">65.43</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>hyperlinks are working
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_click_on_schools</td>
+          <td class="col-duration">69.83</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Schools button is working
+Markers are present on the map
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">SR/semester_report_regression_testing.py::cQube_Semester_Report::test_dots_on_each_districts</td>
+          <td class="col-duration">182.83</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>Markers are present on selection of each district
+<br/></div></td></tr></tbody></table></body></html>

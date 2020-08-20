@@ -1,0 +1,10 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120026","Jahangirpura",24071202502,"Saijpur Guj Shala No 5","37.8 %","63.9 %","56.9 %","33.7 %","35.1 %","31.6 %","40.4 %",350
+2407,"Ahmedabad",240712,"Amc","2407120026","Jahangirpura",24071202501,"Saijpur Guj Shala No 1","38.2 %","71.3 %","63.6 %","47.1 %","31.5 %","33.5 %","32.9 %",217
+2407,"Ahmedabad",240712,"Amc","2407120026","Jahangirpura",24071202603,"Krushnanagar Guj Shala 1","39.4 %","59.1 %","62.1 %","47.9 %","29.0 %","35.0 %","41.1 %",246
+2407,"Ahmedabad",240712,"Amc","2407120026","Jahangirpura",24071202601,"Thakkarbapa Guj Shala - 1","41.9 %","null %","null %","null %","38.1 %","40.6 %","46.1 %",528
+2407,"Ahmedabad",240712,"Amc","2407120026","Jahangirpura",24071202624,"Thakkarbapa Nagar Eng 1","45.8 %","59.5 %","48.5 %","54.8 %","35.5 %","37.8 %","53.4 %",102
+2407,"Ahmedabad",240712,"Amc","2407120026","Jahangirpura",24071202524,"Saijpur Guj Shala No 6","46.9 %","72.4 %","70.7 %","42.7 %","37.6 %","42.8 %","48.8 %",450
+2407,"Ahmedabad",240712,"Amc","2407120026","Jahangirpura",24071202604,"Saijpur Po. H.Q.Guj Shala 2","50.3 %","78.0 %","61.3 %","71.6 %","41.4 %","46.5 %","48.0 %",265
+2407,"Ahmedabad",240712,"Amc","2407120026","Jahangirpura",24071202503,"Saijpur Guj Shala No 3","60.6 %","61.6 %","64.9 %","55.2 %","null %","null %","null %",90
+2407,"Ahmedabad",240712,"Amc","2407120026","Jahangirpura",24071202602,"Thakkarbapa Guj Shala - 2","61.5 %","67.9 %","65.9 %","53.4 %","null %","null %","null %",402

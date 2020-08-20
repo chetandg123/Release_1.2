@@ -21,7 +21,7 @@ class cQube_landing_page():
     def test_CRC(self):
         self.cal = GetData()
         self.cal.page_loading(self.driver)
-        self.driver.find_element_by_xpath("//*[@id='crcr']/img").click()
+        self.driver.find_element_by_xpath("crcr").click()
         self.cal.page_loading(self.driver)
         if "crc-report" in self.driver.current_url:
             print("Navigated to  CRC report")
@@ -45,7 +45,7 @@ class cQube_landing_page():
     def test_TAR(self):
         self.cal = GetData()
         self.cal.page_loading(self.driver)
-        self.driver.find_element_by_xpath("//*[@id='tar']/img").click()
+        self.driver.find_element_by_id("tar").click()
         self.cal.page_loading(self.driver)
         if "teacher-attendance" in self.driver.current_url:
             print("Navigated to  Teacher coming soon page ")

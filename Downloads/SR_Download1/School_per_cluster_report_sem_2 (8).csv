@@ -1,0 +1,8 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120009","Bapunagar",24071202921,"Bapunagar Urdu - 9","39.3 %","null %","null %","null %","34.7 %","38.9 %","43.9 %",201
+2407,"Ahmedabad",240712,"Amc","2407120009","Bapunagar",24071202919,"Bapunagar Urdu - 7","52.4 %","null %","null %","null %","53.1 %","46.4 %","58.7 %",698
+2407,"Ahmedabad",240712,"Amc","2407120009","Bapunagar",24071203119,"Rakhiyal Urdu - 1","60.0 %","null %","null %","null %","53.5 %","62.2 %","65.0 %",290
+2407,"Ahmedabad",240712,"Amc","2407120009","Bapunagar",24071203120,"Rakhiyal Urdu - 2","62.0 %","56.5 %","57.3 %","70.1 %","null %","null %","null %",260
+2407,"Ahmedabad",240712,"Amc","2407120009","Bapunagar",24071202920,"Bapunagar Urdu - 8","62.1 %","75.0 %","47.2 %","70.5 %","null %","null %","null %",214
+2407,"Ahmedabad",240712,"Amc","2407120009","Bapunagar",24071202915,"Bapunagar Urdu - 2","69.5 %","71.0 %","69.7 %","68.4 %","null %","null %","null %",507
+2407,"Ahmedabad",240712,"Amc","2407120009","Bapunagar",24071202916,"Bapunagar Urdu - 4","79.1 %","76.4 %","81.6 %","78.6 %","null %","null %","null %",125

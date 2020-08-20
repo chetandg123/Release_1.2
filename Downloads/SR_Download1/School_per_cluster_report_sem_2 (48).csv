@@ -1,0 +1,5 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240705,"City","2407050002","Chanakya",24070500509,"Nehrunagar Primary School","43.7 %","67.5 %","60.9 %","58.4 %","39.6 %","30.5 %","48.0 %",432
+2407,"Ahmedabad",240705,"City","2407050002","Chanakya",24070500507,"Makarba Primary School","46.7 %","72.7 %","76.1 %","62.6 %","36.8 %","40.5 %","45.4 %",591
+2407,"Ahmedabad",240705,"City","2407050002","Chanakya",24070500506,"Mumatpura Primary School","48.0 %","62.0 %","74.0 %","54.5 %","41.7 %","43.6 %","44.6 %",247
+2407,"Ahmedabad",240705,"City","2407050002","Chanakya",24070501209,"Gheljipura  Pri. School -","51.4 %","63.2 %","80.8 %","57.5 %","42.8 %","50.0 %","43.3 %",191

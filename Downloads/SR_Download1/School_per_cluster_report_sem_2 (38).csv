@@ -1,0 +1,9 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120039","Maninagar",24071203907,"Baherampura-11","24.2 %","null %","null %","null %","22.4 %","21.7 %","27.9 %",263
+2407,"Ahmedabad",240712,"Amc","2407120039","Maninagar",24071203901,"Baherampura-1","32.1 %","null %","null %","null %","32.3 %","29.5 %","34.7 %",247
+2407,"Ahmedabad",240712,"Amc","2407120039","Maninagar",24071203903,"Baherampura-3","33.0 %","49.7 %","53.9 %","37.6 %","27.6 %","28.0 %","32.9 %",375
+2407,"Ahmedabad",240712,"Amc","2407120039","Maninagar",24071203911,"Baherampura-15","41.9 %","null %","null %","null %","38.9 %","40.8 %","45.4 %",225
+2407,"Ahmedabad",240712,"Amc","2407120039","Maninagar",24071203905,"Baherampura-9","42.8 %","74.1 %","64.8 %","53.7 %","34.6 %","36.0 %","42.7 %",479
+2407,"Ahmedabad",240712,"Amc","2407120039","Maninagar",24071203913,"Baherampura-17","46.3 %","null %","null %","null %","46.8 %","43.1 %","48.8 %",254
+2407,"Ahmedabad",240712,"Amc","2407120039","Maninagar",24071203902,"Baherampura-2","55.6 %","68.3 %","62.0 %","40.8 %","null %","null %","null %",366
+2407,"Ahmedabad",240712,"Amc","2407120039","Maninagar",24071203914,"Baherampura-18","56.6 %","61.3 %","60.8 %","50.0 %","null %","null %","null %",371

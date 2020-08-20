@@ -1,0 +1,9 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120040","Meghaninagar",24071204001,"Danlimda-1","33.5 %","null %","null %","null %","33.8 %","31.4 %","34.9 %",327
+2407,"Ahmedabad",240712,"Amc","2407120040","Meghaninagar",24071203909,"Baherampura-13","35.4 %","null %","null %","null %","32.5 %","33.3 %","39.1 %",181
+2407,"Ahmedabad",240712,"Amc","2407120040","Meghaninagar",24071204030,"Danilimda Guj Sch 5","36.8 %","null %","null %","null %","31.5 %","38.2 %","41.2 %",255
+2407,"Ahmedabad",240712,"Amc","2407120040","Meghaninagar",24071204003,"Danilimda-3","38.7 %","null %","null %","null %","39.6 %","42.2 %","34.0 %",403
+2407,"Ahmedabad",240712,"Amc","2407120040","Meghaninagar",24071204005,"Baherampura-8","50.5 %","57.4 %","65.8 %","40.3 %","null %","null %","null %",130
+2407,"Ahmedabad",240712,"Amc","2407120040","Meghaninagar",24071204004,"Danilimda-4","58.9 %","63.8 %","58.5 %","56.3 %","null %","null %","null %",314
+2407,"Ahmedabad",240712,"Amc","2407120040","Meghaninagar",24071204002,"Danilimda-2","60.5 %","62.4 %","61.1 %","59.1 %","null %","null %","null %",182
+2407,"Ahmedabad",240712,"Amc","2407120040","Meghaninagar",24071204033,"Danilimda Guj Sch 6","63.5 %","69.5 %","65.3 %","59.2 %","null %","null %","null %",213

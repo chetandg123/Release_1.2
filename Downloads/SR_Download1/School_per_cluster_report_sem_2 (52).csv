@@ -1,0 +1,4 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240705,"City","2407050006","Makarba",24070501027,"Ranip Pri. School - 8","40.6 %","69.1 %","65.6 %","51.8 %","38.5 %","30.6 %","37.1 %",160
+2407,"Ahmedabad",240705,"City","2407050006","Makarba",24070501020,"Ranipi Pagar Kendra Shala","47.6 %","66.0 %","71.4 %","55.6 %","41.0 %","38.9 %","50.5 %",518
+2407,"Ahmedabad",240705,"City","2407050006","Makarba",24070501006,"Digavi Guj I Pri. School","57.9 %","66.1 %","53.8 %","55.7 %","null %","null %","null %",28

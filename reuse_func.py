@@ -228,7 +228,9 @@ class GetData():
     def navigate_to_student_report(self):
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_id(Data.Dashboard).click()
-        time.sleep(3)
+        time.sleep(2)
+        self.driver.find_element_by_xpath(Data.sar_click).click()
+        time.sleep(2)
         self.driver.find_element_by_id(Data.SAR).click()
         time.sleep(6)
         # self.driver.find_element_by_xpath("//*[@id='SAR']")
@@ -236,17 +238,19 @@ class GetData():
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_id(Data.Dashboard).click()
         time.sleep(2)
-        self.driver.find_element_by_xpath(Data.School_infra).click()
-        time.sleep(3)
+        self.driver.find_element_by_xpath(Data.school_click).click()
+        time.sleep(2)
         self.driver.find_element_by_id(Data.Report).click()
+        time.sleep(6)
 
     def navigate_to_school_infrastructure_map(self):
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_id(Data.Dashboard).click()
         time.sleep(2)
-        self.driver.find_element_by_xpath(Data.School_infra).click()
+        self.driver.find_element_by_xpath(Data.school_click).click()
         time.sleep(2)
         self.driver.find_element_by_id(Data.Reportmap).click()
+        time.sleep(6)
 
     def select_month_year(self,y,m):
         year = Select(self.driver.find_element_by_id(Data.sar_year))
@@ -261,22 +265,25 @@ class GetData():
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_id(Data.Dashboard).click()
         time.sleep(3)
-        # self.driver.find_element_by_xpath("//a[@id='sr']/div/td[2]").click()
-        self.driver.find_element_by_xpath("//*[@id='sr']").click()
-        time.sleep(5)
+        self.driver.find_element_by_xpath(Data.sr_click).click()
+        time.sleep(2)
+        self.driver.find_element_by_id(Data.semester_report).click()
+        time.sleep(6)
 
 
     def navigate_to_crc_report(self):
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_id(Data.Dashboard).click()
-        time.sleep(3)
+        time.sleep(2)
+        self.driver.find_element_by_xpath(Data.crc_click).click()
+        time.sleep(2)
         self.driver.find_element_by_id(Data.CRC).click()
 
     def navigate_to_diksha_graph(self):
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_id(Data.Dashboard).click()
         time.sleep(2)
-        self.driver.find_element_by_xpath(Data.diksha).click()
+        self.driver.find_element_by_xpath(Data.diksha_click).click()
         time.sleep(2)
         self.driver.find_element_by_id(Data.diksha_graph).click()
 

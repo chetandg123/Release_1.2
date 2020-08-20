@@ -1,0 +1,7 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120011","Bapunagar Urdu",24071200310,"Dariyapur-18","22.1 %","null %","null %","null %","18.2 %","19.5 %","28.3 %",93
+2407,"Ahmedabad",240712,"Amc","2407120011","Bapunagar Urdu",24071200309,"Dariyapur-16","26.5 %","35.4 %","38.0 %","29.1 %","22.7 %","22.5 %","28.5 %",141
+2407,"Ahmedabad",240712,"Amc","2407120011","Bapunagar Urdu",24071200306,"Dariyapur-8","32.2 %","70.6 %","65.8 %","35.4 %","20.0 %","23.6 %","34.9 %",50
+2407,"Ahmedabad",240712,"Amc","2407120011","Bapunagar Urdu",24071201801,"Pritampura - 1","44.7 %","70.5 %","53.6 %","57.0 %","40.4 %","37.0 %","46.6 %",310
+2407,"Ahmedabad",240712,"Amc","2407120011","Bapunagar Urdu",24071201829,"Pritamnagar Guj - 3","49.7 %","71.3 %","68.0 %","57.0 %","43.0 %","46.3 %","47.9 %",205
+2407,"Ahmedabad",240712,"Amc","2407120011","Bapunagar Urdu",24071200308,"Dariyapur-12","51.9 %","55.0 %","57.4 %","42.0 %","null %","null %","null %",68

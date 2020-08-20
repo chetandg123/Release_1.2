@@ -1,0 +1,4 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240705,"City","2407050003","Chandlodia",24070501517,"Vastrapur  Pri. School","35.3 %","45.1 %","48.4 %","35.9 %","25.3 %","39.0 %","40.0 %",297
+2407,"Ahmedabad",240705,"City","2407050003","Chandlodia",24070500702,"Memnagar Pri.School","39.2 %","53.5 %","49.1 %","41.8 %","29.6 %","39.7 %","38.8 %",351
+2407,"Ahmedabad",240705,"City","2407050003","Chandlodia",24070501511,"Sarkari Vasahat Vastrapur  Pri","50.2 %","54.4 %","null %","45.7 %","41.1 %","49.5 %","65.4 %",136

@@ -1,0 +1,67 @@
+21-08-2020 01:11:56 PM  INFO  Login execution started
+21-08-2020 01:12:14 PM  INFO  test_login_to_cqube Total : 1 Remaining : 0
+21-08-2020 01:12:20 PM  INFO  test_login_to_cqube is completed...
+21-08-2020 01:12:20 PM  INFO  Login execution ended
+21-08-2020 01:12:33 PM  INFO  student attendance report execution started
+21-08-2020 01:12:56 PM  INFO  test_check_hyperlinks is running Total : 16 Remaining : 15
+21-08-2020 01:13:15 PM  INFO  test_check_hyperlinks is completed...
+21-08-2020 01:13:15 PM  INFO  test_choose_block is running Total : 16 Remaining : 14
+21-08-2020 01:13:25 PM  INFO  test_choose_block is completed...
+21-08-2020 01:13:25 PM  INFO  test_choose_cluster is running Total : 16 Remaining : 13
+21-08-2020 01:13:49 PM  INFO  test_choose_cluster is completed...
+21-08-2020 01:13:49 PM  INFO  test_choose_district is running Total : 16 Remaining : 12
+21-08-2020 01:15:05 PM  INFO  test_choose_district is completed...
+21-08-2020 01:15:05 PM  INFO  test_click_on_blocks is running Total : 16 Remaining : 11
+21-08-2020 01:15:15 PM  INFO  test_click_on_student_attendence_report is completed...
+21-08-2020 01:15:15 PM  INFO  test_click_on_clusters is running Total : 16 Remaining : 10
+21-08-2020 01:15:21 PM  INFO  test_click_on_student_attendence_report is completed...
+21-08-2020 01:15:21 PM  INFO  test_click_on_schools is running Total : 16 Remaining : 9
+21-08-2020 01:15:27 PM  INFO  test_click_on_student_attendence_report is completed...
+21-08-2020 01:15:27 PM  INFO  test_click_on_student_attendence_report is running Total : 16 Remaining : 8
+21-08-2020 01:15:40 PM  INFO  test_date_range is running Total : 16 Remaining : 7
+21-08-2020 01:15:41 PM  INFO  test_download is running Total : 16 Remaining : 6
+21-08-2020 01:15:42 PM  INFO  test_home_icon is running Total : 16 Remaining : 5
+21-08-2020 01:15:43 PM  INFO  test_logout is running Total : 16 Remaining : 4
+21-08-2020 01:15:45 PM  INFO  test_markers_on_map is running Total : 16 Remaining : 3
+21-08-2020 01:15:46 PM  INFO  test_no_of_schools_is_equals_at_districts_blocks_clusters_schools is running Total : 16 Remaining : 2
+21-08-2020 01:15:47 PM  INFO  test_select_month is running Total : 16 Remaining : 1
+21-08-2020 01:15:48 PM  INFO  test_select_year is running Total : 16 Remaining : 0
+21-08-2020 01:15:49 PM  INFO  test_total_no_of_students_is_equals_at_districts_blocks_clusters_schools is running Total : 16 Remaining : -1
+21-08-2020 01:15:50 PM  INFO  student attendance report execution ended
+21-08-2020 01:15:57 PM  INFO  crc report execution started
+21-08-2020 01:16:10 PM  INFO  test_blockwise_data Total : 14 Remaining : 13
+21-08-2020 01:18:44 PM  INFO  test_dash_menu Total : 14 Remaining : 12
+21-08-2020 01:18:45 PM  INFO  test_download_blockwise_csv Total : 14 Remaining : 11
+21-08-2020 01:18:46 PM  INFO  test_donwoad_clusterwise_csv Total : 14 Remaining : 10
+21-08-2020 01:18:47 PM  INFO  test_download_districtwise Total : 14 Remaining : 9
+21-08-2020 01:18:48 PM  INFO  test_homeicon Total : 14 Remaining : 8
+21-08-2020 01:18:49 PM  INFO  test_logout Total : 14 Remaining : 7
+21-08-2020 01:18:50 PM  INFO  test_navigate_crc Total : 14 Remaining : 6
+21-08-2020 01:18:51 PM  INFO  test_orderwise_tabledata Total : 14 Remaining : 5
+21-08-2020 01:18:53 PM  INFO  test_peformance_blockwise Total : 14 Remaining : 4
+21-08-2020 01:18:54 PM  INFO  test_schoolcount Total : 14 Remaining : 3
+21-08-2020 01:18:55 PM  INFO  test_table_data Total : 14 Remaining : 2
+21-08-2020 01:18:56 PM  INFO  test_visited Total : 14 Remaining : 1
+21-08-2020 01:18:57 PM  INFO  test_visits Total : 14 Remaining : 0
+21-08-2020 01:18:58 PM  INFO  crc report execution ended
+21-08-2020 01:19:12 PM  INFO  semester report execution started
+21-08-2020 01:19:31 PM  INFO  test_check_hyperlinks is running Total : 15 Remaining : 14
+21-08-2020 01:20:23 PM  INFO  test_check_hyperlinks is completed...
+21-08-2020 01:20:23 PM  INFO  test_choose_block is running Total : 15 Remaining : 13
+21-08-2020 01:20:43 PM  INFO  test_choose_block is completed...
+21-08-2020 01:20:43 PM  INFO  test_choose_cluster is running Total : 15 Remaining : 12
+21-08-2020 01:21:40 PM  INFO  test_choose_cluster is completed...
+21-08-2020 01:21:40 PM  INFO  test_choose_district is running Total : 15 Remaining : 11
+21-08-2020 01:24:36 PM  INFO  test_choose_district is completed...
+21-08-2020 01:24:36 PM  INFO  test_click_on_blocks is running Total : 15 Remaining : 10
+21-08-2020 01:24:42 PM  INFO  test_click_on_clusters is running Total : 15 Remaining : 9
+21-08-2020 01:24:43 PM  INFO  test_click_on_schools is running Total : 15 Remaining : 8
+21-08-2020 01:24:44 PM  INFO  test_click_on_semester_report is running Total : 15 Remaining : 7
+21-08-2020 01:24:49 PM  INFO  test_download is running Total : 15 Remaining : 6
+21-08-2020 01:24:51 PM  INFO  test_home_button is running Total : 15 Remaining : 5
+21-08-2020 01:25:26 PM  INFO  test_home_icon is running Total : 15 Remaining : 4
+21-08-2020 01:25:56 PM  INFO  test_logout is running Total : 15 Remaining : 3
+21-08-2020 01:26:26 PM  INFO  test_markers_on_map is running Total : 15 Remaining : 2
+21-08-2020 01:26:56 PM  INFO  test_no_of_schools_is_equals_at_districts_blocks_clusters_schools is running Total : 15 Remaining : 1
+21-08-2020 01:27:26 PM  INFO  test_total_no_of_students_is_equals_at_districts_blocks_clusters_schools is running Total : 15 Remaining : 0
+21-08-2020 01:27:56 PM  INFO  semester report execution ended

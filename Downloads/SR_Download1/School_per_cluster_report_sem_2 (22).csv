@@ -1,0 +1,10 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120023","Hansol",24071202741,"Nobalnagar Hindi School 2","43.7 %","71.1 %","42.4 %","43.4 %","38.3 %","43.0 %","45.5 %",129
+2407,"Ahmedabad",240712,"Amc","2407120023","Hansol",24071202404,"Sardar Hindi Shala No - 1","43.7 %","76.6 %","53.0 %","67.3 %","38.6 %","38.7 %","38.3 %",166
+2407,"Ahmedabad",240712,"Amc","2407120023","Hansol",24071202541,"Saijpur Hindi Shala No1","43.8 %","68.9 %","null %","62.5 %","38.2 %","38.2 %","45.4 %",584
+2407,"Ahmedabad",240712,"Amc","2407120023","Hansol",24071202605,"Krushnanagar Hindi Shala 1","44.0 %","72.8 %","60.7 %","55.8 %","40.9 %","41.8 %","38.0 %",93
+2407,"Ahmedabad",240712,"Amc","2407120023","Hansol",24071202303,"Kubernagar Amb  H - 1","47.8 %","null %","null %","null %","44.6 %","47.6 %","51.2 %",431
+2407,"Ahmedabad",240712,"Amc","2407120023","Hansol",24071202355,"Kubernagar Hindi Shala No 4","52.5 %","71.0 %","76.0 %","53.2 %","33.7 %","53.7 %","49.5 %",230
+2407,"Ahmedabad",240712,"Amc","2407120023","Hansol",24071203406,"Thakkar Hi School - 1","55.9 %","null %","null %","null %","55.0 %","60.0 %","52.3 %",321
+2407,"Ahmedabad",240712,"Amc","2407120023","Hansol",24071202304,"Kubernagar Amb  H - 2","59.4 %","74.4 %","46.6 %","62.1 %","null %","null %","null %",387
+2407,"Ahmedabad",240712,"Amc","2407120023","Hansol",24071203404,"Thakkarnagar  Hindi  School - 2","66.9 %","81.2 %","58.6 %","66.2 %","null %","null %","null %",343

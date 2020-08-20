@@ -1,0 +1,11 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120027","Jamalpur",24071202703,"Naroda Guj  1","25.3 %","null %","null %","null %","21.9 %","22.4 %","30.9 %",272
+2407,"Ahmedabad",240712,"Amc","2407120027","Jamalpur",24071202321,"Kubernagar English - 4","27.5 %","54.2 %","9.0 %","32.2 %","23.2 %","35.8 %","31.1 %",103
+2407,"Ahmedabad",240712,"Amc","2407120027","Jamalpur",24071202705,"Muthiya Guj 1","32.0 %","56.7 %","48.8 %","32.2 %","22.8 %","27.2 %","34.1 %",403
+2407,"Ahmedabad",240712,"Amc","2407120027","Jamalpur",24071202725,"Nobal Nagar Guj 1","32.1 %","null %","null %","null %","29.8 %","35.8 %","30.7 %",184
+2407,"Ahmedabad",240712,"Amc","2407120027","Jamalpur",24071202727,"Nobal Nagar Guj 3","36.7 %","null %","null %","null %","30.5 %","41.8 %","37.6 %",383
+2407,"Ahmedabad",240712,"Amc","2407120027","Jamalpur",24071202730,"Naroda  Guj 4","38.3 %","45.7 %","61.2 %","25.2 %","32.4 %","35.6 %","42.1 %",284
+2407,"Ahmedabad",240712,"Amc","2407120027","Jamalpur",24071202701,"Chhara Guj Shala 1","39.7 %","72.1 %","61.5 %","39.2 %","33.4 %","36.7 %","35.1 %",336
+2407,"Ahmedabad",240712,"Amc","2407120027","Jamalpur",24071202704,"Naroda Guj 2","41.8 %","72.0 %","41.2 %","30.9 %","null %","null %","null %",230
+2407,"Ahmedabad",240712,"Amc","2407120027","Jamalpur",24071202728,"Nobal Nagar Guj 4","43.4 %","56.6 %","39.2 %","41.3 %","null %","null %","null %",375
+2407,"Ahmedabad",240712,"Amc","2407120027","Jamalpur",24071202726,"Nobal Nagar Guj 2","57.6 %","66.9 %","57.1 %","51.5 %","null %","null %","null %",166

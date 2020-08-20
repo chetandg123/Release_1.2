@@ -1,0 +1,10 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120021","Gomtipur",24071202202,"Saraspur -7","30.6 %","null %","null %","null %","23.5 %","30.8 %","36.1 %",398
+2407,"Ahmedabad",240712,"Amc","2407120021","Gomtipur",24071202103,"Saraspur - 3","32.7 %","null %","null %","null %","29.7 %","30.3 %","37.7 %",386
+2407,"Ahmedabad",240712,"Amc","2407120021","Gomtipur",24071202107,"Saraspur - 9","34.9 %","61.7 %","55.6 %","38.5 %","22.5 %","33.3 %","35.3 %",157
+2407,"Ahmedabad",240712,"Amc","2407120021","Gomtipur",24071202109,"Saraspur - 13","40.5 %","49.5 %","64.6 %","45.3 %","34.5 %","38.6 %","39.9 %",320
+2407,"Ahmedabad",240712,"Amc","2407120021","Gomtipur",24071202101,"Saraspur - 1","44.4 %","77.8 %","67.1 %","49.5 %","33.1 %","43.6 %","44.3 %",160
+2407,"Ahmedabad",240712,"Amc","2407120021","Gomtipur",24071202204,"Saraspur -11","46.6 %","71.3 %","57.2 %","47.6 %","40.1 %","44.8 %","46.6 %",484
+2407,"Ahmedabad",240712,"Amc","2407120021","Gomtipur",24071202104,"Saraspur - 4","50.7 %","69.3 %","62.7 %","37.0 %","null %","null %","null %",280
+2407,"Ahmedabad",240712,"Amc","2407120021","Gomtipur",24071202236,"Saraspur Guj -26","64.6 %","65.8 %","68.2 %","61.6 %","null %","null %","null %",286
+2407,"Ahmedabad",240712,"Amc","2407120021","Gomtipur",24071202208,"Saraspur -24","67.2 %","null %","null %","67.2 %","null %","null %","null %",77

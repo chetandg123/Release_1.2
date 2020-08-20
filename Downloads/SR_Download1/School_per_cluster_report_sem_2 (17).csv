@@ -1,0 +1,7 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120018","Ellisbridge 1",24071202010,"Meghaninagar - 1","34.3 %","null %","null %","null %","28.1 %","34.9 %","39.7 %",445
+2407,"Ahmedabad",240712,"Amc","2407120018","Ellisbridge 1",24071201807,"Jahangirpura Guj - 1","45.9 %","null %","null %","null %","42.6 %","46.0 %","50.0 %",196
+2407,"Ahmedabad",240712,"Amc","2407120018","Ellisbridge 1",24071202011,"Meghaninagar - 2","52.0 %","64.0 %","57.2 %","43.1 %","null %","null %","null %",120
+2407,"Ahmedabad",240712,"Amc","2407120018","Ellisbridge 1",24071201712,"Premdarwaja - 2","53.2 %","64.9 %","50.9 %","45.3 %","null %","null %","null %",96
+2407,"Ahmedabad",240712,"Amc","2407120018","Ellisbridge 1",24071201808,"Jahangirpura Guj - 2","55.3 %","68.3 %","57.3 %","44.8 %","null %","null %","null %",176
+2407,"Ahmedabad",240712,"Amc","2407120018","Ellisbridge 1",24071202008,"Asarwa  Marathi - 2","73.1 %","83.8 %","84.8 %","86.0 %","68.2 %","84.7 %","67.0 %",58

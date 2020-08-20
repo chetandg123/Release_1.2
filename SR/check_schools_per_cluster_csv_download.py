@@ -44,7 +44,7 @@ class SchoolsPerClusterCsvDownload():
                     self.driver.find_element_by_id('download').click()
                     time.sleep(3)
                     p = pwd()
-                    self.filename =  p.get_download_dir_SR_Download1() +"/School_per_cluster_report.csv"
+                    self.filename =  p.get_download_dir_SR_Download1() +"/School_per_cluster_report_sem_2.csv"
                     if not os.path.isfile(self.filename):
                         print(
                             "District" + select_district.first_selected_option.text + "Block" + select_block.first_selected_option.text + "Cluster" + select_cluster.first_selected_option.text + "csv is not downloaded")

@@ -1,4 +1,4 @@
-#!/home/ubuntu/chetan/cQubeTesting/venv/bin/python
+#!/home/ubuntu/chetan/Release_1.2/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

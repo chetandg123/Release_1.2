@@ -1,0 +1,10 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120030","Kalupur",24071203111,"Rajpur U - 1","51.1 %","66.9 %","74.3 %","69.2 %","21.5 %","44.8 %","57.5 %",244
+2407,"Ahmedabad",240712,"Amc","2407120030","Kalupur",24071203113,"Rajpur U - 3","52.1 %","null %","null %","null %","46.2 %","56.4 %","53.3 %",123
+2407,"Ahmedabad",240712,"Amc","2407120030","Kalupur",24071203017,"Gomtipur U - 1","54.7 %","null %","null %","null %","49.0 %","50.9 %","65.3 %",321
+2407,"Ahmedabad",240712,"Amc","2407120030","Kalupur",24071203019,"Gomtipur U - 3","61.2 %","null %","null %","null %","52.2 %","67.3 %","63.1 %",241
+2407,"Ahmedabad",240712,"Amc","2407120030","Kalupur",24071203117,"Rajpur U - 7","68.1 %","78.8 %","75.9 %","64.1 %","57.2 %","67.2 %","74.8 %",368
+2407,"Ahmedabad",240712,"Amc","2407120030","Kalupur",24071203021,"Gomtipur U - 6","68.2 %","67.4 %","74.6 %","60.2 %","null %","null %","null %",46
+2407,"Ahmedabad",240712,"Amc","2407120030","Kalupur",24071203020,"Gomtipur U - 4","72.5 %","73.2 %","70.8 %","73.4 %","null %","null %","null %",192
+2407,"Ahmedabad",240712,"Amc","2407120030","Kalupur",24071203130,"Rajpur U - 4","72.9 %","70.1 %","74.8 %","71.9 %","null %","null %","null %",87
+2407,"Ahmedabad",240712,"Amc","2407120030","Kalupur",24071203018,"Gomtipur U - 2","73.0 %","76.3 %","75.1 %","68.3 %","null %","null %","null %",290

@@ -1,0 +1,12 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201713,"Shahibaug Hindi - 1","33.1 %","null %","null %","34.4 %","30.5 %","32.5 %","35.2 %",154
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201506,"Dudheshwar - Hindi 1","36.8 %","45.3 %","40.1 %","53.2 %","30.1 %","34.6 %","37.8 %",192
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201410,"Sabarmati  Hindi - 2","38.5 %","41.4 %","39.9 %","35.3 %","null %","null %","null %",118
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201411,"Sabarmati  Hindi - 3","43.3 %","null %","52.5 %","54.2 %","37.1 %","39.7 %","44.3 %",196
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201409,"Sabarmati  Hindi - 1","43.8 %","null %","null %","null %","39.9 %","41.7 %","49.6 %",111
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201715,"Amarpura Hindi - 1","46.9 %","56.9 %","49.3 %","46.5 %","48.7 %","46.5 %","44.3 %",188
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201104,"Naranpura Hindi 1","48.6 %","77.1 %","60.6 %","56.5 %","41.9 %","45.1 %","45.6 %",144
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201110,"Naranpura Hindi 3","54.7 %","null %","null %","null %","50.3 %","54.2 %","58.9 %",243
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201309,"Nava Vadaj Hindi - 1","55.4 %","72.3 %","54.7 %","69.2 %","46.1 %","50.4 %","60.4 %",484
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201611,"Vadaj Hindi 2","58.6 %","51.3 %","60.9 %","61.0 %","null %","null %","null %",96
+2407,"Ahmedabad",240712,"Amc","2407120010","Bapunagar Hindi",24071201116,"Naranpura Hindi 4","64.2 %","41.5 %","69.5 %","68.4 %","null %","null %","null %",244

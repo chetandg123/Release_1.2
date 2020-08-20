@@ -1,0 +1,6 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240702,"Detroj-Rampura","2407020003","Dekawada",24070206101,"Shobhasan  Primary School","31.0 %","45.1 %","45.3 %","25.8 %","33.3 %","24.8 %","30.5 %",197
+2407,"Ahmedabad",240702,"Detroj-Rampura","2407020003","Dekawada",24070201401,"Bhoyani  Primary School","40.4 %","73.8 %","68.6 %","47.5 %","30.8 %","37.6 %","35.5 %",211
+2407,"Ahmedabad",240702,"Detroj-Rampura","2407020003","Dekawada",24070202501,"Ghelada  Primary School","47.3 %","63.3 %","64.2 %","49.4 %","44.6 %","44.2 %","40.1 %",67
+2407,"Ahmedabad",240702,"Detroj-Rampura","2407020003","Dekawada",24070203101,"Indrapura  Primary School","51.3 %","68.8 %","69.5 %","66.5 %","39.3 %","null %","null %",14
+2407,"Ahmedabad",240702,"Detroj-Rampura","2407020003","Dekawada",24070201801,"Damodaripura  Primary School","54.7 %","63.5 %","66.6 %","65.0 %","41.2 %","52.6 %","54.4 %",59

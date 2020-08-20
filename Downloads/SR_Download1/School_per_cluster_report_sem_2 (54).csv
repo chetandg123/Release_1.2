@@ -1,0 +1,5 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240705,"City","2407050008","Nava Naroda",24070501203,"Sarkhej Branch School - 2","29.7 %","null %","null %","null %","27.0 %","25.2 %","34.8 %",216
+2407,"Ahmedabad",240705,"City","2407050008","Nava Naroda",24070501204,"Sarkhej Kanya Pri. School","41.2 %","57.4 %","64.4 %","42.3 %","31.8 %","35.1 %","47.0 %",328
+2407,"Ahmedabad",240705,"City","2407050008","Nava Naroda",24070501206,"Sarkhej Kumar School - 1","50.1 %","65.1 %","56.2 %","53.4 %","54.4 %","48.6 %","41.6 %",287
+2407,"Ahmedabad",240705,"City","2407050008","Nava Naroda",24070501202,"Sarkhej Branch School-1","62.2 %","64.4 %","61.5 %","61.6 %","null %","null %","null %",168

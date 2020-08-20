@@ -307,150 +307,150 @@ class cQube_Student_Attendance(unittest.TestCase):
 
         self.logger.info("test_cluster_per_block_csv_download is completed...")
 
-    # def test_schools_per_cluster_csv_download1(self):
-    #     time.sleep(25)
-    #     self.driver = self.data.get_driver_SAR_Download1()
-    #     self.data.open_cqube_appln(self.driver)
-    #     self.data.login_cqube(self.driver)
-    #     self.data.navigate_to_student_report()
-    #     year = Select(self.driver.find_element_by_id(Data.sar_year))
-    #     month = Select(self.driver.find_element_by_id(Data.sar_month))
-    #     self.year = year.first_selected_option.text
-    #     self.month = month.first_selected_option.text
-    #     self.tests.pop()
-    #     self.logger.info("test_schools_per_cluster_csv_download is running" + " " + "Total :" + " " + str(
-    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-    #
-    #     schools = SchoolsPerClusterCsvDownload(self.driver,self.year,self.month)
-    #     result = schools.check_csv_download1()
-    #     if result == 0:
-    #         print("Schools per cluster csv download report is working")
-    #         print("on selection of each district,block and cluster")
-    #         print("The footer value of no of schools and no of students are")
-    #         print("equals to downloaded file")
-    #     else:
-    #         raise self.failureException("Schools per cluster csv report download is working")
-    #
-    #     self.logger.info("test_schools_per_cluster_csv_download is completed...")
-    #
-    # def test_schools_per_cluster_csv_download2(self):
-    #     time.sleep(25)
-    #     self.driver = self.data.get_driver_SAR_Download2()
-    #     self.data.open_cqube_appln(self.driver)
-    #     self.data.login_cqube(self.driver)
-    #     self.data.navigate_to_student_report()
-    #     year = Select(self.driver.find_element_by_id(Data.sar_year))
-    #     month = Select(self.driver.find_element_by_id(Data.sar_month))
-    #     self.year = year.first_selected_option.text
-    #     self.month = month.first_selected_option.text
-    #     self.tests.pop()
-    #     self.logger.info("test_schools_per_cluster_csv_download is running" + " " + "Total :" + " " + str(
-    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-    #
-    #     schools = SchoolsPerClusterCsvDownload(self.driver,self.year,self.month)
-    #     result = schools.check_csv_download2()
-    #     if result == 0:
-    #         print("Schools per cluster csv download report is working")
-    #         print("on selection of each district,block and cluster")
-    #         print("The footer value of no of schools and no of students are")
-    #         print("equals to downloaded file")
-    #     else:
-    #         raise self.failureException("Schools per cluster csv report download is working")
-    #
-    #     self.logger.info("test_schools_per_cluster_csv_download is completed...")
-    #
-    # def test_schools_per_cluster_csv_download3(self):
-    #     time.sleep(5)
-    #     self.driver = self.data.get_driver_SAR_Download3()
-    #     self.data.open_cqube_appln(self.driver)
-    #     self.data.login_cqube(self.driver)
-    #     self.data.navigate_to_student_report()
-    #     year = Select(self.driver.find_element_by_id(Data.sar_year))
-    #     month = Select(self.driver.find_element_by_id(Data.sar_month))
-    #     self.year = year.first_selected_option.text
-    #     self.month = month.first_selected_option.text
-    #     self.tests.pop()
-    #     self.logger.info("test_schools_per_cluster_csv_download is running" + " " + "Total :" + " " + str(
-    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-    #
-    #     schools = SchoolsPerClusterCsvDownload(self.driver,self.year,self.month)
-    #     result = schools.check_csv_download3()
-    #     if result == 0:
-    #         print("Schools per cluster csv download report is working")
-    #         print("on selection of each district,block and cluster")
-    #         print("The footer value of no of schools and no of students are")
-    #         print("equals to downloaded file")
-    #     else:
-    #         raise self.failureException("Schools per cluster csv report download is working")
-    #
-    #     self.logger.info("test_schools_per_cluster_csv_download is completed...")
-    # def test_schools_per_cluster_csv_download4(self):
-    #     time.sleep(2)
-    #     self.driver = self.data.get_driver_SAR_Download4()
-    #     self.data.open_cqube_appln(self.driver)
-    #     self.data.login_cqube(self.driver)
-    #     self.data.navigate_to_student_report()
-    #     year = Select(self.driver.find_element_by_id(Data.sar_year))
-    #     month = Select(self.driver.find_element_by_id(Data.sar_month))
-    #     self.year = year.first_selected_option.text
-    #     self.month = month.first_selected_option.text
-    #     self.tests.pop()
-    #     self.logger.info("test_schools_per_cluster_csv_download is running" + " " + "Total :" + " " + str(
-    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-    #
-    #     schools = SchoolsPerClusterCsvDownload(self.driver,self.year,self.month)
-    #     result = schools.check_csv_download4()
-    #     if result == 0:
-    #         print("Schools per cluster csv download report is working")
-    #         print("on selection of each district,block and cluster")
-    #         print("The footer value of no of schools and no of students are")
-    #         print("equals to downloaded file")
-    #     else:
-    #         raise self.failureException("Schools per cluster csv report download is working")
-    #
-    #     self.logger.info("test_schools_per_cluster_csv_download is completed...")
-    #
-    #
-    # def test_dots_on_each_districts(self):
-    #     self.tests.pop()
-    #     time.sleep(5)
-    #     self.logger.info("test_dots_on_each_districts is running" + " " + "Total :" + " " + str(
-    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-    #
-    #     dist = DotsOnDistricts(self.driver)
-    #     result = dist.check_dots_on_each_districts()
-    #     if result != 0:
-    #         raise self.failureException('data not found')
-    #     else:
-    #         print("Markers are present on selection of each district")
-    #     self.logger.info("test_dots_on_each_districts is completed...")
-    #
-    #
-    # def test_dots_on_each_districts_and_each_block(self):
-    #     self.tests.pop()
-    #     self.logger.info("test_dots_on_each_districts_and_each_block is running" + " " + "Total :" + " " + str(
-    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-    #
-    #     dist_block = DotsOnDistrictsBlock(self.driver)
-    #     result = dist_block.check_dots_on_each_districts_block()
-    #     if result != 0:
-    #         raise self.failureException('data not found')
-    #     else:
-    #         print("Markers are present on selection of each district and block")
-    #     self.logger.info("test_dots_on_each_districts_and_each_block is completed...")
-    #
-    # def test_date_range(self):
-    #     self.tests.pop()
-    #     self.logger.info("test_date_range is running" + " " + "Total :" + " " + str(
-    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-    #     daterange = DateRange(self.driver)
-    #     result = daterange.check_date_range()
-    #     self.driver.find_element_by_id('homeBtn').click()
-    #     time.sleep(2)
-    #     self.data.navigate_to_student_report()
-    #     if result != 0:
-    #      raise self.failureException('Data Range in correct')
-    #     self.logger.info("test_date_range is completed...")
+    def test_schools_per_cluster_csv_download1(self):
+        time.sleep(25)
+        self.driver = self.data.get_driver_SAR_Download1()
+        self.data.open_cqube_appln(self.driver)
+        self.data.login_cqube(self.driver)
+        self.data.navigate_to_student_report()
+        year = Select(self.driver.find_element_by_id(Data.sar_year))
+        month = Select(self.driver.find_element_by_id(Data.sar_month))
+        self.year = year.first_selected_option.text
+        self.month = month.first_selected_option.text
+        self.tests.pop()
+        self.logger.info("test_schools_per_cluster_csv_download is running" + " " + "Total :" + " " + str(
+            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+
+        schools = SchoolsPerClusterCsvDownload(self.driver,self.year,self.month)
+        result = schools.check_csv_download1()
+        if result == 0:
+            print("Schools per cluster csv download report is working")
+            print("on selection of each district,block and cluster")
+            print("The footer value of no of schools and no of students are")
+            print("equals to downloaded file")
+        else:
+            raise self.failureException("Schools per cluster csv report download is working")
+
+        self.logger.info("test_schools_per_cluster_csv_download is completed...")
+
+    def test_schools_per_cluster_csv_download2(self):
+        time.sleep(25)
+        self.driver = self.data.get_driver_SAR_Download2()
+        self.data.open_cqube_appln(self.driver)
+        self.data.login_cqube(self.driver)
+        self.data.navigate_to_student_report()
+        year = Select(self.driver.find_element_by_id(Data.sar_year))
+        month = Select(self.driver.find_element_by_id(Data.sar_month))
+        self.year = year.first_selected_option.text
+        self.month = month.first_selected_option.text
+        self.tests.pop()
+        self.logger.info("test_schools_per_cluster_csv_download is running" + " " + "Total :" + " " + str(
+            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+
+        schools = SchoolsPerClusterCsvDownload(self.driver,self.year,self.month)
+        result = schools.check_csv_download2()
+        if result == 0:
+            print("Schools per cluster csv download report is working")
+            print("on selection of each district,block and cluster")
+            print("The footer value of no of schools and no of students are")
+            print("equals to downloaded file")
+        else:
+            raise self.failureException("Schools per cluster csv report download is working")
+
+        self.logger.info("test_schools_per_cluster_csv_download is completed...")
+
+    def test_schools_per_cluster_csv_download3(self):
+        time.sleep(5)
+        self.driver = self.data.get_driver_SAR_Download3()
+        self.data.open_cqube_appln(self.driver)
+        self.data.login_cqube(self.driver)
+        self.data.navigate_to_student_report()
+        year = Select(self.driver.find_element_by_id(Data.sar_year))
+        month = Select(self.driver.find_element_by_id(Data.sar_month))
+        self.year = year.first_selected_option.text
+        self.month = month.first_selected_option.text
+        self.tests.pop()
+        self.logger.info("test_schools_per_cluster_csv_download is running" + " " + "Total :" + " " + str(
+            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+
+        schools = SchoolsPerClusterCsvDownload(self.driver,self.year,self.month)
+        result = schools.check_csv_download3()
+        if result == 0:
+            print("Schools per cluster csv download report is working")
+            print("on selection of each district,block and cluster")
+            print("The footer value of no of schools and no of students are")
+            print("equals to downloaded file")
+        else:
+            raise self.failureException("Schools per cluster csv report download is working")
+
+        self.logger.info("test_schools_per_cluster_csv_download is completed...")
+    def test_schools_per_cluster_csv_download4(self):
+        time.sleep(2)
+        self.driver = self.data.get_driver_SAR_Download4()
+        self.data.open_cqube_appln(self.driver)
+        self.data.login_cqube(self.driver)
+        self.data.navigate_to_student_report()
+        year = Select(self.driver.find_element_by_id(Data.sar_year))
+        month = Select(self.driver.find_element_by_id(Data.sar_month))
+        self.year = year.first_selected_option.text
+        self.month = month.first_selected_option.text
+        self.tests.pop()
+        self.logger.info("test_schools_per_cluster_csv_download is running" + " " + "Total :" + " " + str(
+            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+
+        schools = SchoolsPerClusterCsvDownload(self.driver,self.year,self.month)
+        result = schools.check_csv_download4()
+        if result == 0:
+            print("Schools per cluster csv download report is working")
+            print("on selection of each district,block and cluster")
+            print("The footer value of no of schools and no of students are")
+            print("equals to downloaded file")
+        else:
+            raise self.failureException("Schools per cluster csv report download is working")
+
+        self.logger.info("test_schools_per_cluster_csv_download is completed...")
+
+
+    def test_dots_on_each_districts(self):
+        self.tests.pop()
+        time.sleep(5)
+        self.logger.info("test_dots_on_each_districts is running" + " " + "Total :" + " " + str(
+            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+
+        dist = DotsOnDistricts(self.driver)
+        result = dist.check_dots_on_each_districts()
+        if result != 0:
+            raise self.failureException('data not found')
+        else:
+            print("Markers are present on selection of each district")
+        self.logger.info("test_dots_on_each_districts is completed...")
+
+
+    def test_dots_on_each_districts_and_each_block(self):
+        self.tests.pop()
+        self.logger.info("test_dots_on_each_districts_and_each_block is running" + " " + "Total :" + " " + str(
+            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+
+        dist_block = DotsOnDistrictsBlock(self.driver)
+        result = dist_block.check_dots_on_each_districts_block()
+        if result != 0:
+            raise self.failureException('data not found')
+        else:
+            print("Markers are present on selection of each district and block")
+        self.logger.info("test_dots_on_each_districts_and_each_block is completed...")
+
+    def test_date_range(self):
+        self.tests.pop()
+        self.logger.info("test_date_range is running" + " " + "Total :" + " " + str(
+            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+        daterange = DateRange(self.driver)
+        result = daterange.check_date_range()
+        self.driver.find_element_by_id('homeBtn').click()
+        time.sleep(2)
+        self.data.navigate_to_student_report()
+        if result != 0:
+         raise self.failureException('Data Range in correct')
+        self.logger.info("test_date_range is completed...")
 
 
     def tearDown(cls):

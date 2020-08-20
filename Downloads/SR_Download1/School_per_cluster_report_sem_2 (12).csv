@@ -1,0 +1,10 @@
+﻿DistrictId,DistrictName,BlockId,BlockName,ClusterId,ClusterName,SchoolId,SchoolName,Semester_Performance,Grade3,Grade4,Grade5,Grade6,Grade7,Grade8,TotalStudents
+2407,"Ahmedabad",240712,"Amc","2407120013","Bhaipura Hatkeshwar",24071201303,"Nava Vadaj - 3","33.9 %","61.1 %","30.7 %","45.3 %","29.9 %","27.7 %","37.6 %",193
+2407,"Ahmedabad",240712,"Amc","2407120013","Bhaipura Hatkeshwar",24071201624,"Ramdevprji Tekara School","36.1 %","58.8 %","62.5 %","45.2 %","25.0 %","30.0 %","34.7 %",244
+2407,"Ahmedabad",240712,"Amc","2407120013","Bhaipura Hatkeshwar",24071201310,"Gandhinagar Guj - 2","40.2 %","60.8 %","58.6 %","50.3 %","35.3 %","33.3 %","36.9 %",240
+2407,"Ahmedabad",240712,"Amc","2407120013","Bhaipura Hatkeshwar",24071201307,"Nava Vadaj - 9","41.8 %","64.5 %","63.4 %","46.7 %","35.4 %","38.5 %","40.1 %",508
+2407,"Ahmedabad",240712,"Amc","2407120013","Bhaipura Hatkeshwar",24071201603,"Vadaj - 3","43.1 %","68.0 %","46.8 %","53.8 %","35.7 %","45.7 %","43.9 %",420
+2407,"Ahmedabad",240712,"Amc","2407120013","Bhaipura Hatkeshwar",24071201301,"Nava Vadaj - 1","46.1 %","62.2 %","63.8 %","46.1 %","41.3 %","46.1 %","44.0 %",371
+2407,"Ahmedabad",240712,"Amc","2407120013","Bhaipura Hatkeshwar",24071201601,"Vadaj - 1","48.9 %","57.0 %","61.2 %","47.0 %","41.3 %","49.9 %","50.9 %",460
+2407,"Ahmedabad",240712,"Amc","2407120013","Bhaipura Hatkeshwar",24071201605,"Mahatma Gandhi - 1","52.5 %","73.1 %","68.8 %","46.3 %","44.3 %","55.2 %","52.8 %",394
+2407,"Ahmedabad",240712,"Amc","2407120013","Bhaipura Hatkeshwar",24071201609,"Usmanpura - 2","57.2 %","88.3 %","68.6 %","68.5 %","44.5 %","55.9 %","57.5 %",98

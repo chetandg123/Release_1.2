@@ -244,18 +244,6 @@ class cQube_Student_Attendance(unittest.TestCase):
         print("Total number of students equals on clicking of blocks,clusters,schools")
         self.logger.info("test_total_no_of_students_is_equals_at_districts_blocks_clusters_schools is completed...")
 
-    # def test_no_of_schools_and_no_of_dots_are_equal_at_each_cluster_level(self):
-    #     self.tests.pop()
-    #     self.logger.info("test_no_of_schools_and_no_of_dots_are_equal_at_each_cluster_level is running" + " " + "Total :" + " " + str(
-    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-    #
-    #     cluster = ClusterDotsWithNoOfSchools(self.driver)
-    #     result = cluster.comapre_cluster()
-    #     if result != 0:
-    #         raise self.failureException('data not matched')
-    #     print("No of schools and No of Dots are equal at cluster level")
-    #     self.logger.info("test_no_of_schools_and_no_of_dots_are_equal_at_each_cluster_level is completed...")
-
     def test_home_icon(self):
         self.tests.pop()
         self.logger.info("test_home_icon is running" + " " + "Total :" + " " + str(
@@ -308,7 +296,7 @@ class cQube_Student_Attendance(unittest.TestCase):
         self.logger.info("test_cluster_per_block_csv_download is completed...")
 
     def test_schools_per_cluster_csv_download1(self):
-        time.sleep(25)
+        time.sleep(60*2)
         self.driver = self.data.get_driver_SAR_Download1()
         self.data.open_cqube_appln(self.driver)
         self.data.login_cqube(self.driver)

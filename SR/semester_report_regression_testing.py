@@ -46,10 +46,10 @@ class cQube_Semester_Report(unittest.TestCase):
         self.tests.pop()
         self.logger.info("test_click_on_dashboard is running" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-
-        dashboard = Dashboard(self.driver)
-        dashboard.click_on_dashboard()
-        print("Navigating to Dashboard is working")
+        if "Semester Report" in self.driver.page_source:
+            print("Dashboard menu of semester is working")
+        else:
+            raise self.failureException("Dashboard menu of semester is not working")
         self.logger.info("test_click_on_dashboard is completed...")
 
     def test_click_on_semester_report(self):
@@ -58,7 +58,7 @@ class cQube_Semester_Report(unittest.TestCase):
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
 
         sr = SemesterReport(self.driver)
-        result = sr.click_on_semester()
+        result = sr.check_semester_landing_page()
         if "Semester Report" in result:
             print("Navigating to semester Report is working")
         else:

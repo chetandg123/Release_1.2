@@ -68,6 +68,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_check_district_names(self):
         self.tests.pop()
+        time.sleep(4)
         self.logger.info("test_check_district_names" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = District_names(self.driver)
@@ -78,6 +79,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_check_markes_on_map(self):
         self.tests.pop()
+        time.sleep(3)
         self.logger.info("test_check_markes_on_map" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = check_markers_on_map(self.driver)
@@ -89,6 +91,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_infrascore(self):
         self.tests.pop()
+        time.sleep(3)
         self.logger.info("test_infrascore" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = SchoolInfra_scores(self.driver)
@@ -139,6 +142,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_school_infra_options(self):
         self.tests.pop()
+        time.sleep(5)
         self.logger.info("test_school_infra_options" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = School_infra_options(self.driver)
@@ -151,6 +155,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_download(self):
         self.tests.pop()
+        time.sleep(4)
         self.logger.info("test_download" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = download_icon(self.driver)
@@ -163,6 +168,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_click_on_home(self):
         self.tests.pop()
+        time.sleep(4)
         self.logger.info("test_click_on_home" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = click_on_home(self.driver)
@@ -175,6 +181,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_blockelevel_home_click(self):
         self.tests.pop()
+        time.sleep(2)
         self.logger.info("test_blockelevel_home_click" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = block_level_home(self.driver)
@@ -186,6 +193,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
         self.logger.info("test_blockelevel_home_click is completed...")
 
     def test_school_count(self):
+        time.sleep(8)
         self.tests.pop()
         self.logger.info("test_school_count" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
@@ -211,6 +219,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_click_on_block(self):
         self.tests.pop()
+        time.sleep(1)
         self.logger.info("test_click_on_block" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = click_on_blocks(self.driver)
@@ -221,6 +230,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_blocklevel_file(self):
         self.tests.pop()
+        time.sleep(4)
         self.logger.info("test_blocklevel_file" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = Blockwise_csv_download(self.driver)
@@ -241,6 +251,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_cluster_and_homebtn(self):
         self.tests.pop()
+        time.sleep(5)
         self.logger.info("test_cluster_and_homebtn" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = click_cluster_and_home(self.driver)
@@ -251,6 +262,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_clusterwise_download(self):
         self.tests.pop()
+        time.sleep(5)
         self.logger.info("test_clusterwise_download" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = clusterwise_download(self.driver)
@@ -261,6 +273,7 @@ class cQube_SI_Map_Report(unittest.TestCase):
 
     def test_clusterbtn(self):
         self.tests.pop()
+        time.sleep(4)
         self.logger.info("test_clusterbtn" + " " + "Total :" + " " + str(
             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
         b = cluster_button(self.driver)
@@ -492,102 +505,102 @@ class cQube_SI_Map_Report(unittest.TestCase):
         print("district wise map records checked")
         self.logger.info("test_sc_map_districtwise is completed...")
 
-    def test_sc_map_blockwise(self):
-         self.tests.pop()
-         self.logger.info("test_sc_map_blockwise" + " " + "Total :" + " " + str(
-             self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-         b = school_map_blockwise(self.driver)
-         result = b.test_schools()
-         self.assertEqual(0,result,msg="No data found")
-         print("blockwise wise map records checked")
-         self.logger.info("test_sc_map_blockwise is completed...")
+    # def test_sc_map_blockwise(self):
+    #      self.tests.pop()
+    #      self.logger.info("test_sc_map_blockwise" + " " + "Total :" + " " + str(
+    #          self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+    #      b = school_map_blockwise(self.driver)
+    #      result = b.test_schools()
+    #      self.assertEqual(0,result,msg="No data found")
+    #      print("blockwise wise map records checked")
+    #      self.logger.info("test_sc_map_blockwise is completed...")
     #
-    def test_schools_per_cluster_csv_download1(self):
-        time.sleep(10)
-        self.driver = self.data.get_driver_SIMAP_Download1()
-        self.data.open_cqube_appln(self.driver)
-        self.data.login_cqube(self.driver)
-        self.data.navigate_to_school_infrastructure_map()
-        self.tests.pop()
-        self.logger.info("test_schools_per_cluster_csv_download1 is running" + " " + "Total :" + " " + str(
-            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-        school = test_school_map_schoollevel_records(self.driver)
-        result = school.check_download_csv1()
-        if result == 0:
-            print("Schools per cluster csv download report is working")
-            print("on selection of each district,block and cluster")
-            print("The footer value of no of schools and no of students are")
-            print("equals to downloaded file")
-        else:
-            raise self.failureException("Schools per cluster csv report download1 is working")
+    # def test_schools_per_cluster_csv_download1(self):
+    #     time.sleep(10)
+    #     self.driver = self.data.get_driver_SIMAP_Download1()
+    #     self.data.open_cqube_appln(self.driver)
+    #     self.data.login_cqube(self.driver)
+    #     self.data.navigate_to_school_infrastructure_map()
+    #     self.tests.pop()
+    #     self.logger.info("test_schools_per_cluster_csv_download1 is running" + " " + "Total :" + " " + str(
+    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+    #     school = test_school_map_schoollevel_records(self.driver)
+    #     result = school.check_download_csv1()
+    #     if result == 0:
+    #         print("Schools per cluster csv download report is working")
+    #         print("on selection of each district,block and cluster")
+    #         print("The footer value of no of schools and no of students are")
+    #         print("equals to downloaded file")
+    #     else:
+    #         raise self.failureException("Schools per cluster csv report download1 is working")
 
-        self.logger.info("test_schools_per_cluster_csv_download1 is completed...")
-
-
-
-    def test_schools_per_cluster_csv_download2(self):
-        time.sleep(15)
-        self.driver = self.data.get_driver_SIMAP_Download2()
-        self.data.open_cqube_appln(self.driver)
-        self.data.login_cqube(self.driver)
-        self.data.navigate_to_school_infrastructure_map()
-        self.tests.pop()
-        self.logger.info("test_schools_per_cluster_csv_download2 is running" + " " + "Total :" + " " + str(
-            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-        school = test_school_map_schoollevel_records(self.driver)
-        result = school.check_download_csv2()
-        if result == 0:
-            print("Schools per cluster csv download report is working")
-            print("on selection of each district,block and cluster")
-            print("The footer value of no of schools and no of students are")
-            print("equals to downloaded file")
-        else:
-            raise self.failureException("Schools per cluster csv report download2 is working")
-
-        self.logger.info("test_schools_per_cluster_csv_download2 is completed...")
+        # self.logger.info("test_schools_per_cluster_csv_download1 is completed...")
 
 
-    def test_schools_per_cluster_csv_download3(self):
-        time.sleep(15)
-        self.driver = self.data.get_driver_SIMAP_Download3()
-        self.data.open_cqube_appln(self.driver)
-        self.data.login_cqube(self.driver)
-        self.data.navigate_to_school_infrastructure_map()
-        self.tests.pop()
-        self.logger.info("test_schools_per_cluster_csv_download3 is running" + " " + "Total :" + " " + str(
-            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-        school = test_school_map_schoollevel_records(self.driver)
-        result = school.check_download_csv3()
-        if result == 0:
-            print("Schools per cluster csv download report is working")
-            print("on selection of each district,block and cluster")
-            print("The footer value of no of schools and no of students are")
-            print("equals to downloaded file")
-        else:
-            raise self.failureException("Schools per cluster csv report download3 is working")
 
-        self.logger.info("test_schools_per_cluster_csv_download3 is completed...")
-
-
-    def test_schools_per_cluster_csv_download4(self):
-        time.sleep(20)
-        self.driver = self.data.get_driver_SIMAP_Download4()
-        self.data.open_cqube_appln(self.driver)
-        self.data.login_cqube(self.driver)
-        self.data.navigate_to_school_infrastructure_map()
-        self.tests.pop()
-        self.logger.info("test_schools_per_cluster_csv_download4 is running" + " " + "Total :" + " " + str(
-            self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
-        school = test_school_map_schoollevel_records(self.driver)
-        result = school.check_download_csv4()
-        if result == 0:
-            print("Schools per cluster csv download report is working")
-            print("on selection of each district,block and cluster")
-            print("The footer value of no of schools and no of students are")
-            print("equals to downloaded file")
-        else:
-            raise self.failureException("Schools per cluster csv report download4 is working")
-        self.logger.info("test_schools_per_cluster_csv_download4 is completed...")
+    # def test_schools_per_cluster_csv_download2(self):
+    #     time.sleep(15)
+    #     self.driver = self.data.get_driver_SIMAP_Download2()
+    #     self.data.open_cqube_appln(self.driver)
+    #     self.data.login_cqube(self.driver)
+    #     self.data.navigate_to_school_infrastructure_map()
+    #     self.tests.pop()
+    #     self.logger.info("test_schools_per_cluster_csv_download2 is running" + " " + "Total :" + " " + str(
+    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+    #     school = test_school_map_schoollevel_records(self.driver)
+    #     result = school.check_download_csv2()
+    #     if result == 0:
+    #         print("Schools per cluster csv download report is working")
+    #         print("on selection of each district,block and cluster")
+    #         print("The footer value of no of schools and no of students are")
+    #         print("equals to downloaded file")
+    #     else:
+    #         raise self.failureException("Schools per cluster csv report download2 is working")
+    #
+    #     self.logger.info("test_schools_per_cluster_csv_download2 is completed...")
+    #
+    #
+    # def test_schools_per_cluster_csv_download3(self):
+    #     time.sleep(15)
+    #     self.driver = self.data.get_driver_SIMAP_Download3()
+    #     self.data.open_cqube_appln(self.driver)
+    #     self.data.login_cqube(self.driver)
+    #     self.data.navigate_to_school_infrastructure_map()
+    #     self.tests.pop()
+    #     self.logger.info("test_schools_per_cluster_csv_download3 is running" + " " + "Total :" + " " + str(
+    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+    #     school = test_school_map_schoollevel_records(self.driver)
+    #     result = school.check_download_csv3()
+    #     if result == 0:
+    #         print("Schools per cluster csv download report is working")
+    #         print("on selection of each district,block and cluster")
+    #         print("The footer value of no of schools and no of students are")
+    #         print("equals to downloaded file")
+    #     else:
+    #         raise self.failureException("Schools per cluster csv report download3 is working")
+    #
+    #     self.logger.info("test_schools_per_cluster_csv_download3 is completed...")
+    #
+    #
+    # def test_schools_per_cluster_csv_download4(self):
+    #     time.sleep(20)
+    #     self.driver = self.data.get_driver_SIMAP_Download4()
+    #     self.data.open_cqube_appln(self.driver)
+    #     self.data.login_cqube(self.driver)
+    #     self.data.navigate_to_school_infrastructure_map()
+    #     self.tests.pop()
+    #     self.logger.info("test_schools_per_cluster_csv_download4 is running" + " " + "Total :" + " " + str(
+    #         self.total_tests) + " " + "Remaining :" + " " + str(len(self.tests) - 1))
+    #     school = test_school_map_schoollevel_records(self.driver)
+    #     result = school.check_download_csv4()
+    #     if result == 0:
+    #         print("Schools per cluster csv download report is working")
+    #         print("on selection of each district,block and cluster")
+    #         print("The footer value of no of schools and no of students are")
+    #         print("equals to downloaded file")
+    #     else:
+    #         raise self.failureException("Schools per cluster csv report download4 is working")
+    #     self.logger.info("test_schools_per_cluster_csv_download4 is completed...")
 
     @classmethod
     def tearDownClass(cls):

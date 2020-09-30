@@ -183,9 +183,9 @@ class Data():
     errormsg = "//p"
 
     # for SAR_2
-    SAR_Blocks_btn = "block"
-    SAR_Clusters_btn = "cluster"
-    SAR_Schools_btn = "school"
+    SAR_Blocks_btn = "allBlock"
+    SAR_Clusters_btn = "allCluster"
+    SAR_Schools_btn = "allSchool"
     # footer
     schoolcount = "schools"
     students = "students"
